@@ -1,3 +1,5 @@
+// This file is where you create all the API calls for the client app
+
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -17,7 +19,7 @@ export class FetchApiDataService {
    constructor(private http: HttpClient) {
    }
 
-   // Making the api call for the user registration endpoint
+   // Making the api call for the user registration endpoint, public so it can be accessed by the registration component
    public userRegistration(userDetails: any): Observable<any> {
       console.log(userDetails);
       return this.http.post(apiUrl + 'users', userDetails).pipe(
@@ -25,6 +27,7 @@ export class FetchApiDataService {
       );
    }
 
+   // Making the api call for the user login endpoint, public so it can be accessed by the login component
    public userLogin(userDetails: any): Observable<any> {
       return this.http.post(apiUrl + 'login', userDetails).pipe(
          catchError(this.handleError)
