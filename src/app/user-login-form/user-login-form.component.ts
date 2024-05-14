@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserLoginFormComponent implements OnInit {
 
-   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+   @Input() userData = { username: '', password: '' };  
 
    constructor(
       public fetchApiData: FetchApiDataService,
@@ -32,6 +32,7 @@ export class UserLoginFormComponent implements OnInit {
    loginUser(): void {
       this.fetchApiData.userLogin(this.userData).subscribe((result) => {
          // Logic for a successful user login goes here! (To be implemented)
+         console.log('UserInfo:', this.userData);
          console.log('Verify fetch after successful fetch', result);
 
          localStorage.setItem('user', JSON.stringify(result.user));
@@ -48,6 +49,7 @@ export class UserLoginFormComponent implements OnInit {
             duration: 2000
          });
       }, (result) => {  // Error handling ??
+         console.log('UserInfo:', this.userData);
          console.log('Verify value of result in error branch:', result);
          this.snackBar.open(result, 'Failed', {
             duration: 2000
