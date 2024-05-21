@@ -15,13 +15,15 @@ import { FormsModule } from '@angular/forms';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 
 // The NgModule decorator identifies AppModule as an Angular module class
 @NgModule({
   declarations: [  // Components, directives, and pipes that belong to this module
     AppComponent,
     UserRegistrationFormComponent,
-    UserLoginFormComponent
+    UserLoginFormComponent,
+    MovieCardComponent
   ],
   imports: [         // Modules that are imported by this module
     BrowserModule,
