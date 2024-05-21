@@ -16,6 +16,7 @@ import { UserRegistrationFormComponent } from './user-registration-form/user-reg
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 // The NgModule decorator identifies AppModule as an Angular module class
 @NgModule({
@@ -23,7 +24,8 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     AppComponent,
     UserRegistrationFormComponent,
     UserLoginFormComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    WelcomePageComponent
   ],
   imports: [         // Modules that are imported by this module
     BrowserModule,
