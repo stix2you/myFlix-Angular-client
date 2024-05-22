@@ -9,7 +9,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
    selector: 'app-user-login-form',
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class UserLoginFormComponent implements OnInit {
 
-   @Input() userData = { username: '', password: '' };  
+   @Input() userData = { username: '', password: '' };
 
    constructor(
       public fetchApiData: FetchApiDataService,
@@ -38,10 +38,12 @@ export class UserLoginFormComponent implements OnInit {
          console.log('Verify fetch after successful fetch', result);
 
          localStorage.setItem('user', JSON.stringify(result.user));
+         localStorage.setItem('username', result.user.username); // Store username separately
          localStorage.setItem('token', result.token);
 
          // Console log to verify stored data
          console.log('Local Storage: User data:', JSON.parse(localStorage.getItem('user') || '{}'));
+         console.log('Local Storage: Username:', localStorage.getItem('username')); // Log username
          console.log('Local Storage: Token:', localStorage.getItem('token'));
 
          this.dialogRef.close(); // This will close the modal on success!
@@ -51,7 +53,7 @@ export class UserLoginFormComponent implements OnInit {
          this.snackBar.open(result, 'OK', {
             duration: 2000
          });
-      }, (result) => {  // Error handling ??
+      }, (result) => {  // Error handling
          console.log('UserInfo:', this.userData);
          console.log('Verify value of result in error branch:', result);
          this.snackBar.open(result, 'Failed', {

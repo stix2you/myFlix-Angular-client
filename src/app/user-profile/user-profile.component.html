@@ -1,0 +1,38 @@
+<div class="profile-container">
+   <mat-card>
+      <mat-card-title>User Profile</mat-card-title>
+      <mat-card-content>
+         <div *ngIf="!editMode; else editForm">
+            <p><strong>Username:</strong> {{ userProfile.username }}</p>
+            <p><strong>Email:</strong> {{ userProfile.email }}</p>
+            <p><strong>Birthday:</strong> {{ userProfile.birthday | date }}</p>
+            <p><strong>Password:</strong> ********</p>
+            <button mat-raised-button color="primary" (click)="toggleEditMode()">Update Information</button>
+         </div>
+         <ng-template #editForm>
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+               <mat-form-field>
+                  <mat-label>Username</mat-label>
+                  <input matInput formControlName="username" />
+               </mat-form-field>
+               <mat-form-field>
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" />
+               </mat-form-field>
+               <mat-form-field>
+                  <mat-label>Birthday</mat-label>
+                  <input matInput formControlName="birthday" type="date" />
+               </mat-form-field>
+               <mat-form-field>
+                  <mat-label>Password</mat-label>
+                  <input matInput formControlName="password" type="password" />
+                  <mat-hint>Leave blank if no changes</mat-hint>
+               </mat-form-field>
+               <button mat-raised-button color="primary" type="submit">Submit Changes</button>
+               <button mat-raised-button color="warn" type="button" (click)="onDelete()">Delete Account</button>
+               <button mat-raised-button type="button" (click)="toggleEditMode()">Back</button>
+            </form>
+         </ng-template>
+      </mat-card-content>
+   </mat-card>
+</div>

@@ -34,6 +34,40 @@ export class FetchApiDataService {
       );
    }
 
+   public getUserProfile(username: string): Observable<any> {
+      const token = localStorage.getItem('token');
+      return this.http.get(`${apiUrl}users/${username}`, {
+         headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+         })
+      }).pipe(
+         map(this.extractResponseData),
+         catchError(this.handleError)
+      );
+   }
+
+   public updateUserProfile(username: string, userDetails: any): Observable<any> {
+      const token = localStorage.getItem('token');
+      return this.http.put(`${apiUrl}users/${username}`, userDetails, {
+         headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+         })
+      }).pipe(
+         catchError(this.handleError)
+      );
+   }
+
+   public deleteUserAccount(username: string): Observable<any> {
+      const token = localStorage.getItem('token');
+      return this.http.delete(`${apiUrl}users/${username}`, {
+         headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+         })
+      }).pipe(
+         catchError(this.handleError)
+      );
+   }
+
    getAllMovies(): Observable<any> {
       const token = localStorage.getItem('token');
       return this.http.get(apiUrl + 'movies', {
