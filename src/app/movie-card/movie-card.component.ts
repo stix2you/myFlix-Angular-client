@@ -1,6 +1,7 @@
 // src/app/movie-card/movie-card.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // this component will render the movies in the database on a main page
 // the list will be sortable by title, genre, director, actor, and year.  It will be filterable by these same categories.
@@ -14,7 +15,7 @@ import { FetchApiDataService } from '../fetch-api-data.service'
 })
 export class MovieCardComponent {
    movies: any[] = [];  // stores the movies data from the API
-   constructor(public fetchApiData: FetchApiDataService) { }
+   constructor(public fetchApiData: FetchApiDataService, public snackBar: MatSnackBar) { }
 
    // This method will fetch the movies when the Angular is done creating the component
    ngOnInit(): void {
@@ -29,4 +30,16 @@ export class MovieCardComponent {
          return this.movies;
       });
    }
+
+   addToFavorites(movie: any): void {
+      this.fetchApiData.addFavoriteMovie(movie._id).subscribe((response) => {
+        this.snackBar.open(`${movie.Title} has been added to your favorites!`, 'OK', {
+          duration: 2000
+        });
+      }, (error) => {
+        this.snackBar.open('Failed to add to favorites', 'OK', {
+          duration: 2000
+        });
+      });
+    }
 }
