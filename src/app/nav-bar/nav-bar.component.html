@@ -1,1 +1,12 @@
-<p>nav-bar works!</p>
+<!-- src/app/nav-bar/nav-bar.component.html -->
+<nav *ngIf="isLoggedIn()" class="navbar">
+   <div class="navbar-brand">
+      <a routerLink="/movies" class="navbar-item">MyFlix App</a>
+   </div>
+   <div class="navbar-menu">
+      <a routerLink="/movies" class="navbar-item">Home</a>
+      <a routerLink="/profile" class="navbar-item">Profile</a>
+      <a routerLink="/favorites" class="navbar-item">Favorites</a>
+      <a (click)="logout()" class="navbar-item">Logout</a>
+   </div>
+</nav>

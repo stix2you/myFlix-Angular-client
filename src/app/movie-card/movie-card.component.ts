@@ -13,8 +13,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
    templateUrl: './movie-card.component.html',
    styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent {
-   movies: any[] = [];  // stores the movies data from the API
+export class MovieCardComponent implements OnInit {
+   movies: any[] = [];
+   filteredMovies: any[] = [];
+   searchTerm: string = '';
+   sortOrder: string = 'title-asc';
+   limit: number = 50;
+
+   // constructor for the component that will call the necessary functions for the component to work
    constructor(public fetchApiData: FetchApiDataService, public snackBar: MatSnackBar) { }
 
    // This method will fetch the movies when the Angular is done creating the component
@@ -27,19 +33,61 @@ export class MovieCardComponent {
       this.fetchApiData.getAllMovies().subscribe((resp: any) => {
          this.movies = resp;
          console.log(this.movies);
+         this.applyFilters();
          return this.movies;
       });
    }
 
+
+   applyFilters(): void {
+      let movies = this.movies;
+
+      // Filter by search term
+      if (this.searchTerm) {
+         movies = movies.filter(movie => movie.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      }
+
+      // Sort movies
+      if (this.sortOrder === 'title-asc') {
+         movies.sort((a, b) => a.Title.localeCompare(b.Title));
+      } else if (this.sortOrder === 'title-desc') {
+         movies.sort((a, b) => b.Title.localeCompare(a.Title));
+      } else if (this.sortOrder === 'year-asc') {
+         movies.sort((a, b) => a.ReleaseYear - b.ReleaseYear);
+      } else if (this.sortOrder === 'year-desc') {
+         movies.sort((a, b) => b.ReleaseYear - a.ReleaseYear);
+      }
+
+      // Limit movies
+      this.filteredMovies = movies.slice(0, this.limit);
+   }
+
+   onSearch(term: string): void {
+      this.searchTerm = term;
+      this.applyFilters();
+   }
+
+   onSort(order: string): void {
+      this.sortOrder = order;
+      this.applyFilters();
+   }
+
+   onLimitChange(limit: number): void {
+      this.limit = limit;
+      this.applyFilters();
+   }
+
+
+
    addToFavorites(movie: any): void {
       this.fetchApiData.addFavoriteMovie(movie._id).subscribe((response) => {
-        this.snackBar.open(`${movie.Title} has been added to your favorites!`, 'OK', {
-          duration: 2000
-        });
+         this.snackBar.open(`${movie.Title} has been added to your favorites!`, 'OK', {
+            duration: 2000
+         });
       }, (error) => {
-        this.snackBar.open('Failed to add to favorites', 'OK', {
-          duration: 2000
-        });
+         this.snackBar.open('Failed to add to favorites', 'OK', {
+            duration: 2000
+         });
       });
-    }
+   }
 }

@@ -1,15 +1,21 @@
 <!-- src/app/movie-card/movie-card.component.html -->
-<mat-card *ngFor="let movie of movies; let i=index;">
-   <mat-dialog-content>
-      <mat-card-header>
-         <mat-card-title>{{ movie.Title }}</mat-card-title>
-         <mat-card-subtitle>{{ movie.ReleaseYear }}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">
-      <mat-card-actions>
-         <button mat-icon-button color="primary" (click)="addToFavorites(movie)">
-            <mat-icon>favorite</mat-icon>
-         </button>
-      </mat-card-actions>
-   </mat-dialog-content>
-</mat-card>
+<div class="main-content">
+
+   <app-search-filter (search)="onSearch($event)" (sort)="onSort($event)"
+      (limitChange)="onLimitChange($event)"></app-search-filter>
+      
+   <div class="movie-list">
+      <mat-card *ngFor="let movie of filteredMovies; let i=index">
+         <mat-card-header>
+            <mat-card-title>{{ movie.Title }}</mat-card-title>
+            <mat-card-subtitle>{{ movie.ReleaseYear }}</mat-card-subtitle>
+         </mat-card-header>
+         <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">
+         <mat-card-actions>
+            <button mat-icon-button color="primary" (click)="addToFavorites(movie)">
+               <mat-icon>favorite</mat-icon>
+            </button>
+         </mat-card-actions>
+      </mat-card>
+   </div>
+</div>

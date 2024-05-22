@@ -1,0 +1,12 @@
+/* src/app/movie-view/movie-view.component.css */
+.main-content {
+   margin-top: 10rem;
+   /* Adjust based on the combined height of the navbar and search filter card */
+   padding: 1rem;
+}
+
+.movie-list {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1rem;
+}

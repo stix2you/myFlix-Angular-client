@@ -80,6 +80,7 @@ export class FetchApiDataService {
          catchError(this.handleError)
       );
    }
+   
    // Non-typed response extraction
    private extractResponseData(res: Object): any {
       const body = res;
