@@ -1,3 +1,4 @@
+// This file defines the root components of the application
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,6 +6,8 @@ import { Component } from '@angular/core';
    templateUrl: './app.component.html',
    styleUrls: ['./app.component.scss']
 })
+
+// Class that defines the component itself
 export class AppComponent {
    title = 'myFlix-Angular-client';
 }
