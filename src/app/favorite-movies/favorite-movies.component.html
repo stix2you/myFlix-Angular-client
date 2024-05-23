@@ -16,7 +16,7 @@
             </mat-card-header>
             <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">
             <mat-card-actions class="movie-card-actions">
-               <button mat-icon-button color="primary" (click)="removeFromFavorites(movie)">
+               <button mat-icon-button color="primary" matTooltip="Remove From Favorites" (click)="removeFromFavorites(movie)">
                   <mat-icon>remove</mat-icon>
                </button>
                <button mat-raised-button color="primary" class="large-details-button"

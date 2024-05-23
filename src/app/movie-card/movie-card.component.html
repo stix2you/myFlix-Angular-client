@@ -12,7 +12,7 @@
             </mat-card-header>
             <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">
             <mat-card-actions class="movie-card-actions">
-               <button mat-icon-button color="warn" (click)="addToFavorites(movie)">
+               <button mat-icon-button color="warn" matTooltip="Add to Favorites" (click)="addToFavorites(movie)">
                   <mat-icon>favorite</mat-icon>
                </button>
                <button mat-raised-button color="primary" class="large-details-button"

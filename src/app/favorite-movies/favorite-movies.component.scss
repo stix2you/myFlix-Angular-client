@@ -64,6 +64,14 @@
    /* Adjust padding for a larger button */
 }
 
+.mat-tooltip {
+   background-color: #333;
+   color: white;
+   font-size: 0.875rem;
+   border-radius: 4px;
+   padding: 0.5rem;
+}
+
 @media (max-width: 1200px) {
    .movie-card {
       width: 200px;
