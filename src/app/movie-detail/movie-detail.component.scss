@@ -41,6 +41,17 @@ mat-card-actions {
    margin: 0.5rem 0;
 }
 
+.movie-details a {
+   color: #1976d2;
+   text-decoration: underline;
+   cursor: pointer;
+}
+
+.movie-details a:hover {
+   color: #0056b3;
+   text-decoration: none;
+}
+
 mat-card-actions {
    display: flex;
    justify-content: left;
