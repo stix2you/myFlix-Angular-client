@@ -1,76 +1,124 @@
-User Stories
-● As a user, I want to be able to receive information on movies, directors, and genres so that I
-can learn more about movies I’ve watched or am interested in.
-● As a user, I want to be able to create a profile so I can save data about my favorite movies.
+*************************
+WELCOME TO MYFLIX ANGULAR
+*************************
 
-Key Features
-● Your app should display a welcome view where users will be able to either log in or register an
-account.
-● Once authenticated, the user should now view all movies.
-● Upon clicking on a particular movie, users will be taken to a single movie view, where
-additional movie details will be displayed. The single movie view will contain the following
-additional features:
-○ A button that when clicked takes a user to the director view, where details about the
-director of that particular movie will be displayed.
-○ A button that when clicked takes a user to the genre view, where details about that
-particular genre of the movie will be displayed.
 
-Technical Requirements
-● The application must be written in Angular (version 9 or later)
-● The application requires the latest version of Node.js and npm package
-● The application must contain user registration and login forms
-● The application must be designed using Angular Material
-● The application's codebase must contain comments using Typedoc
-● The project must contain technical documentation using JSDoc
-● The project must be hosted on GitHub Pages
+--------------------
+Project Description:
+--------------------
 
-Your Project Deliverables
-You’ll complete your project step-by-step as you work through each Exercise. For each task, you’ll
-submit a deliverable that directly contributes to the final product—in this case, an Angular version of
-the myFlix app with all the necessary documentation. Furthermore, you'll update your personal
-portfolio website that you'll need to apply for a job.
+MyFlix Angular is a Movie Catalog App to catalog Movies and store data on the Movies, Directors, Actors, Genres, and the Users who wish to view the data.  It was built using Angular and is connected to a backend database.  It also uses Angular Material for styling. 
 
-Below is a breakdown of your course project deliverables by Exercise:
 
-Exercise 1: Collaboration and Project Management
-● Set up a kanban board that you’ll use as you work on this Achievement's project
-● Create a user flow for your project
-● Practice answering non-technical interview questions
-Throughout this Achievement, you’ll be asked to keep your kanban board up to date. Make sure to
-work with your kanban board for each task, and take some time to reflect on your project planning and
-assumptions. Were your tasks well broken down and your story points accurate? If not, what could
-you improve? By doing this, you can practice your various Agile skills.
+Project Dependencies: 
+This project uses an API built by myself, hosted here:
+https://stix2you-myflix-5cbcd3c20372.herokuapp.com/
 
-Exercise 2: Introduction to Angular
-● Create an app using Angular CLI
-● Practice answering technical interview questions
+Further information and documentation related to this API can be found here:
+https://github.com/stix2you/myFlix_api
 
-Exercise 3: Advanced Angular Part 1
-● Implement user registration and login forms using Angular Material
-● Practice answering technical interview questions
+Git Repo for this client-side Angular project here:
+https://github.com/stix2you/myFlix-Angular-client
 
-Exercise 4: Advanced Angular Part 2
-● Implement a movie card component in your app
-● Define the routing in your app
-● Practice answering technical interview questions
 
-Exercise 5: Documentation & Handoffs
-● Comment on the app's codebase
-● Prepare all the necessary documentation for the app
-● Finalize kanban board
 
-Exercise 6: Providing Constructive Feedback
-● Review a given screen design and provide constructive feedback
-● Finalize portfolio preparation
-● Practice answering non-technical and technical interview questions
+----------------------------------
+PROJECT SETUP FOR DEV ENVIRONMENT:
+----------------------------------
 
-Exercise 7: Contributing to the Tech Community & Beyond
-● Join online and offline developer communities
-● Incorporate your projects into your portfolio site
+- Download repo from above URL and install in a directory.
+
+- In terminal windown within that directory:
+
+- Set up Node to lateset stable version
+
+   nvm install 16.19.0 (or whatever is latest stable version)
+   nvm use 16.19.0
+
+- Install Angular [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6
+
+   npm install -g @angular/cli
+
+- Install Angular Material [documentation here: https://material.angular.io/]
+
+   ng add @angular/material
+
+- Navigate to directory you want to place the project in
+
+- Clone this repository https://github.com/stix2you/myFlix-Angular-client
+
+   git clone https://github.com/stix2you/myFlix-Angular-client
+
+- Install project dependencies (see full list below):
+
+   npm install 
+
+- To start Dev server for mobile devices, enter:
+
+   npm start   (this runs a script to launch a dev server on port 8080, which is accepted by the CORS of the database)
+
+
+-------------
+DEPENDENCIES:
+-------------
+
+Dependencies can be viewed in the package.json file, this is a copy of that file as of the writing of this document:
+
+{
+  "name": "my-flix-angular-client",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --port 8080",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^17.3.0",
+    "@angular/cdk": "^17.3.8",
+    "@angular/common": "^17.3.0",
+    "@angular/compiler": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/forms": "^17.3.0",
+    "@angular/material": "^17.3.8",
+    "@angular/platform-browser": "^17.3.0",
+    "@angular/platform-browser-dynamic": "^17.3.0",
+    "@angular/router": "^17.3.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.3.6",
+    "@angular/cli": "^17.3.6",
+    "@angular/compiler-cli": "^17.3.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.4.2"
+  }
+}
+
+
+********************
+ANGULAR INFORMATION:
+********************
 
 # MyFlixAngularClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+
+To set up this project, install Angular globally on your machine:
+$ npm install -g @angular/cli
+
+Then clone this repository into a project directory, go to that directory, and install dependencies:
+$ npm install
 
 ## Development server
 
