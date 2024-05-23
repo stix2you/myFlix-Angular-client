@@ -1,9 +1,11 @@
 <div class="main-content">
    <app-search-filter aria-label="Search and Filter Movies" (search)="onSearch($event)" (sort)="onSort($event)" (limitChange)="onLimitChange($event)"></app-search-filter>
 
-   <div *ngIf="filteredMovies.length === 0" class="no-favorites-message" role="alert">
-      No movies in favorites! Click the Blue Heart to add Favorite movies!
-   </div>
+   <mat-card *ngIf="filteredMovies.length === 0" class="no-favorites-card" role="alert">
+      <mat-card-content>
+         No movies in favorites! Click the Red Hearts on Movie Cards to add Favorite movies!
+      </mat-card-content>
+   </mat-card>
 
    <div class="movie-list-container" role="region" aria-label="Movie List">
       <div class="movie-list">

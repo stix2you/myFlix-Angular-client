@@ -172,8 +172,15 @@
    margin-top: 8rem;
 }
 
-.no-favorites-message {
+.no-favorites-card {
    font-size: 1.2rem;
    text-align: center;
-   margin-top: 2rem;
+   margin: 2rem auto;
+   background-color: white;
+   color: #000; /* dark text color */
+   border-radius: 10px;
+   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+   max-width: 80%;
+   width: 100%;
+   padding: 1rem;
 }
