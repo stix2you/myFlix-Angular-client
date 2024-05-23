@@ -6,7 +6,9 @@
       <div class="movie-list">
          <mat-card *ngFor="let movie of filteredMovies; let i=index" class="movie-card">
             <mat-card-header class="movie-card-header">
-               <mat-card-title>{{ movie.Title }}</mat-card-title>
+               <mat-card-title [ngClass]="getFontClass(movie.Title)">
+                  {{ movie.Title }}
+               </mat-card-title>
                <!-- <mat-card-subtitle>{{ movie.ReleaseYear }}</mat-card-subtitle> -->
             </mat-card-header>
             <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">

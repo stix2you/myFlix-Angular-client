@@ -1,5 +1,5 @@
 // src/app/movie-card/movie-card.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -20,6 +20,8 @@ export class MovieCardComponent implements OnInit {
    searchTerm: string = '';
    sortOrder: string = 'title-asc';
    limit: number = 50;
+   @Input() title: string = '';  // @Input decorator means the parent component can pass data to it
+   fontClass: string = '';
 
    // constructor for the component that will call the necessary functions for the component to work
    constructor(
@@ -33,6 +35,23 @@ export class MovieCardComponent implements OnInit {
       this.getMovies();
    }
 
+   // This method will determine the font size of the movie titles based on their length
+   getFontClass(title: string): string {
+      const textLength = title.length;
+      let fontClass: string;
+
+      if (textLength > 50) {
+         fontClass = 'small-font';
+      } else if (textLength > 20) {
+         fontClass = 'medium-font';
+      } else {
+         fontClass = 'large-font';
+      }
+
+      console.log(`Title: ${title}, Length: ${textLength}, Font Class: ${fontClass}`);
+      return fontClass;
+   }
+
    // This method will fetch the movies from the API using the FetchApiDataService
    getMovies(): void {
       this.fetchApiData.getAllMovies().subscribe((resp: any) => {
@@ -42,7 +61,6 @@ export class MovieCardComponent implements OnInit {
          return this.movies;
       });
    }
-
 
    applyFilters(): void {
       let movies = this.movies;
