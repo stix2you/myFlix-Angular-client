@@ -36,11 +36,18 @@ $myFlix-Angular-client-theme: mat.define-light-theme((color: (primary: $myFlix-A
 html,
 body {
    height: 100%;
+
 }
 
 body {
    margin: 0;
    font-family: Roboto, "Helvetica Neue", sans-serif;
+   background-image: url('/assets/background.webp');
+   background-size: cover;
+   background-position: center;
+   background-attachment: fixed;
+   /* This makes the background fixed */
+   background-repeat: no-repeat;
 }
 
 

@@ -1,14 +1,14 @@
 <!-- src/app/search-filter/search-filter.component.html -->
 <mat-card class="search-filter-card">
    <form (ngSubmit)="onSearch()" class="filter-form">
-      <mat-form-field>
+      <mat-form-field class="filter-form-field">
          <mat-label>Search Movies</mat-label>
          <input matInput [(ngModel)]="searchTerm" name="searchTerm" />
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Search</button>
+      <button class="filter-form-button" mat-raised-button color="primary" type="submit">Search</button>
    </form>
    <form (ngSubmit)="onSort()" class="filter-form">
-      <mat-form-field>
+      <mat-form-field class="filter-form-field">
          <mat-label>Sort By</mat-label>
          <mat-select [(ngModel)]="sortOrder" name="sortOrder">
             <mat-option value="title-asc">Title Ascending</mat-option>
@@ -17,13 +17,13 @@
             <mat-option value="year-desc">Year Descending</mat-option>
          </mat-select>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Sort</button>
+      <button class="filter-form-button" mat-raised-button color="primary" type="submit">Sort</button>
    </form>
    <form (ngSubmit)="onLimit()" class="filter-form">
-      <mat-form-field>
-         <mat-label>Number of Movies</mat-label>
+      <mat-form-field class="filter-form-field">
+         <mat-label>Number to Display</mat-label>
          <input matInput [(ngModel)]="limit" name="limit" type="number" />
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Set Limit</button>
+      <button class="filter-form-button" mat-raised-button color="primary" type="submit">Set Limit</button>
    </form>
 </mat-card>

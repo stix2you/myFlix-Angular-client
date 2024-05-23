@@ -1,0 +1,36 @@
+/* Background with movie-themed wallpaper */
+:host {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   background-image: url('/assets/background.webp');
+   background-size: cover;
+   background-position: center;
+ }
+ 
+ /* Centered card with shadow */
+ .welcome-card {
+   text-align: center;
+   align-items: center;
+   padding: 2rem;
+   max-width: 400px;
+   width: 100%;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   border-radius: 8px;
+   background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+ }
+ 
+ h1 {
+   margin-bottom: 1rem;
+ }
+ 
+ p {
+   margin-bottom: 2rem;
+ }
+ 
+ button {
+   margin: 0.5rem;
+   width: calc(50% - 1rem);
+ }
+ 
