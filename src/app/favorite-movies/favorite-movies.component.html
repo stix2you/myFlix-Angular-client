@@ -1,0 +1,25 @@
+<!-- src/app/favorite-movies/favorite-movies.component.html -->
+<div class="favorite-movies">
+   <app-search-filter (search)="onSearch($event)" (sort)="onSort($event)"
+      (limitChange)="onLimitChange($event)"></app-search-filter>
+   <div *ngIf="movies.length === 0" class="no-favorites-message">
+      No movies in favorites! Click the Blue Heart to add Favorite movies!
+   </div>
+   <div class="movie-list" *ngIf="movies.length > 0">
+      <mat-card *ngFor="let movie of movies; let i=index">
+         <mat-card-header>
+            <mat-card-title>{{ movie.Title }}</mat-card-title>
+            <mat-card-subtitle>{{ movie.ReleaseYear }}</mat-card-subtitle>
+         </mat-card-header>
+         <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">
+         <mat-card-content>
+            <p>{{ movie.Description }}</p>
+         </mat-card-content>
+         <mat-card-actions>
+            <button mat-icon-button color="primary" (click)="removeFromFavorites(movie)">
+               <mat-icon>remove</mat-icon>
+            </button>
+         </mat-card-actions>
+      </mat-card>
+   </div>
+</div>

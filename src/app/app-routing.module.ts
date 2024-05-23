@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-//import { FavoritesComponent } from './favorites/favorites.component'; // Assume this component exists
+import { FavoriteMoviesComponent } from './favorite-movies/favorite-movies.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Routes = [
    { path: 'movies', component: MovieCardComponent },
    { path: 'profile', component: UserProfileComponent },
-  // { path: 'favorites', component: FavoritesComponent },
+   { path: 'favorites', component: FavoriteMoviesComponent },
    { path: 'welcome', component: WelcomePageComponent },
    { path: '', redirectTo: 'movies', pathMatch: 'full' },
 ];

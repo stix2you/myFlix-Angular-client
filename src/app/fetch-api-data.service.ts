@@ -80,7 +80,7 @@ export class FetchApiDataService {
          catchError(this.handleError)
       );
    }
-   
+
    // Non-typed response extraction
    private extractResponseData(res: Object): any {
       const body = res;
@@ -167,6 +167,19 @@ export class FetchApiDataService {
       );
    }
 
+   public removeFavoriteMovie(movieId: string): Observable<any> {
+      const token = localStorage.getItem('token');
+      const username = localStorage.getItem('username');
+      return this.http.delete(`${apiUrl}users/${username}/movies/${movieId}`, {
+         headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+         })
+      }).pipe(
+         map(this.extractResponseData),
+         catchError(this.handleError)
+      );
+   }
+
    editUser(userDetails: any): Observable<any> {
       const token = localStorage.getItem('token');
       const username = localStorage.getItem('user');
@@ -198,7 +211,7 @@ export class FetchApiDataService {
    deleteFavoriteMovie(movie: any): Observable<any> {
       const token = localStorage.getItem('token');
       const username = localStorage.getItem('user');
-      return this.http.delete(apiUrl + `users/${username}/movies/${movie}`, {
+      return this.http.delete(apiUrl + `users/${username}/movies/${movie.Title}`, {
          headers: new HttpHeaders(
             {
                Authorization: 'Bearer ' + token,
