@@ -41,25 +41,19 @@ export class FavoriteMoviesComponent implements OnInit {
          fontClass = 'large-font';
       }
 
-      console.log(`Title: ${title}, Length: ${textLength}, Font Class: ${fontClass}`);
       return fontClass;
    }
 
    // This method will fetch the favorite movies from the API using the FetchApiDataService
    getFavoriteMovies(): void {
       const username = localStorage.getItem('username');
-      console.log('Fetching user profile for username:', username);
       if (username) {
          this.fetchApiData.getUserProfile(username).subscribe((response: any) => {
-            console.log('User profile response:', response);
             const favoriteMovieTitles = response.favorite_movies;
-            console.log('Favorite movie titles:', favoriteMovieTitles);
             this.favorites = [];
             favoriteMovieTitles.forEach((title: string) => {
-               console.log('Fetching movie details for title:', title);
                this.fetchApiData.getOneMovie(title).subscribe(
                   (movie: any) => {
-                     console.log('Fetched movie details:', movie);
                      this.favorites.push(movie);
                      this.applyFilters(); // Apply filters after fetching all movies
                   },
@@ -93,7 +87,6 @@ export class FavoriteMoviesComponent implements OnInit {
 
       // Limit movies
       this.filteredMovies = movies.slice(0, this.limit);
-      console.log('Filtered movies after applying filters:', this.filteredMovies);
    }
 
    onSearch(term: string): void {
@@ -116,7 +109,6 @@ export class FavoriteMoviesComponent implements OnInit {
    }
 
    removeFromFavorites(movie: any): void {
-      console.log(`Attempting to remove movie from favorites: ${movie.Title}`);
       this.fetchApiData.removeFavoriteMovie(movie.Title).subscribe((response) => {
          this.snackBar.open(`${movie.Title} has been removed from your favorites!`, 'OK', {
             duration: 2000

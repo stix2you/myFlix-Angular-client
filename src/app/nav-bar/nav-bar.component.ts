@@ -20,10 +20,5 @@ export class NavBarComponent {
       localStorage.removeItem('username');
       this.router.navigate(['welcome']);
    }
-
-   searchMovies(): void {
-      // Implement search logic here
-      console.log('Search term:', this.searchTerm);
-   }
 }
 

@@ -1,0 +1,26 @@
+.user-card {
+   max-width: 400px;
+   margin: 2em auto;
+   padding: 1em;
+   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+   border-radius: 8px;
+}
+
+mat-card-header {
+   text-align: center;
+}
+
+mat-form-field.full-width {
+   width: 100%;
+   margin-bottom: 1em;
+}
+
+.action-button {
+   width: 100%;
+   background-color: #3f51b5;
+   color: #fff;
+
+   &:hover {
+      background-color: #303f9f;
+   }
+}

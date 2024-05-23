@@ -1,34 +1,44 @@
-<!-- src/app/user-registration-form/user-registration-form.component.html 
-althought looks like html, this actually contains DIRECTIVES such as the ngModel 
-which binds the inputs by the user to the userData object:  [(ngModel)]="userData.Username"
-
-In a nutshell, what you’re doing here is wiring up what you defined 
-in the component’s file (the TypeScript file) with some HTML, 
-with the help of Angular's directives and binding syntax -->
-
-<mat-card>
+<mat-card class="user-card">
    <mat-card-header>
       <mat-card-title>Sign Up!</mat-card-title>
    </mat-card-header>
    <mat-card-content>
-      <form>
-         <mat-form-field>
-            <input matInput [(ngModel)]="userData.username" placeholder="Username" type="text" name="Username" required>
+      <form #registrationForm="ngForm">
+         <mat-form-field class="full-width">
+            <input matInput [(ngModel)]="userData.username" placeholder="Username" type="text" name="username" required
+               minlength="8">
+            <mat-error
+               *ngIf="registrationForm.controls['username']?.invalid && registrationForm.controls['username']?.touched">
+               Username must be at least 8 characters long
+            </mat-error>
          </mat-form-field>
-         <mat-form-field>
-            <input matInput [(ngModel)]="userData.password" type="password" placeholder="Password" name="Password"
-               required>
+         <mat-form-field class="full-width">
+            <input matInput [(ngModel)]="userData.password" type="password" placeholder="Password" name="password"
+               required minlength="8">
+            <mat-error
+               *ngIf="registrationForm.controls['password']?.invalid && registrationForm.controls['password']?.touched">
+               Password must be at least 8 characters long
+            </mat-error>
          </mat-form-field>
-         <mat-form-field>
-            <input matInput [(ngModel)]="userData.email" type="email" placeholder="Email" name="Email" required>
+         <mat-form-field class="full-width">
+            <input matInput [(ngModel)]="userData.email" type="email" placeholder="Email" name="email" required email>
+            <mat-error
+               *ngIf="registrationForm.controls['email']?.invalid && registrationForm.controls['email']?.touched">
+               Please enter a valid email address
+            </mat-error>
          </mat-form-field>
-         <mat-form-field>
-            <input matInput [(ngModel)]="userData.birthday" type="date" placeholder="Birthday" name="Birthday">
+         <mat-form-field class="full-width">
+            <input matInput [(ngModel)]="userData.birthday" type="date" placeholder="Birthday" name="birthday" required>
+            <mat-error
+               *ngIf="registrationForm.controls['birthday']?.invalid && registrationForm.controls['birthday']?.touched">
+               Please enter a valid date
+            </mat-error>
          </mat-form-field>
       </form>
    </mat-card-content>
    <mat-card-actions>
-      <button mat-raised-button (click)="registerUser()" color="primary">
+      <button mat-raised-button (click)="registerUser()" color="primary" [disabled]="registrationForm.invalid"
+         class="action-button">
          Sign Up
       </button>
    </mat-card-actions>

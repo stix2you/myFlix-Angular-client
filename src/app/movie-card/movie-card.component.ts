@@ -47,7 +47,6 @@ export class MovieCardComponent implements OnInit {
          fontClass = 'large-font';
       }
 
-      console.log(`Title: ${title}, Length: ${textLength}, Font Class: ${fontClass}`);
       return fontClass;
    }
 
@@ -55,7 +54,6 @@ export class MovieCardComponent implements OnInit {
    getMovies(): void {
       this.fetchApiData.getAllMovies().subscribe((resp: any) => {
          this.movies = resp;
-         console.log(this.movies);
          this.applyFilters();
          return this.movies;
       });

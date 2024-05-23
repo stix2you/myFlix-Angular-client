@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { Router } from '@angular/router';
 
 @Component({
    selector: 'app-user-profile',
@@ -14,7 +15,8 @@ export class UserProfileComponent implements OnInit {
 
    constructor(
       private fetchApiData: FetchApiDataService,
-      private fb: FormBuilder
+      private fb: FormBuilder,
+      private router: Router
    ) {
       this.profileForm = this.fb.group({
          username: [''],
@@ -25,18 +27,14 @@ export class UserProfileComponent implements OnInit {
    }
 
    ngOnInit(): void {
-      console.log('ngOnInit called');
       this.getUserProfile();
    }
 
    getUserProfile(): void {
       const username = localStorage.getItem('username');
-      console.log('Retrieved username from localStorage:', username); // Debug log
 
       if (username) {
-         console.log('Username found, making API call to get user profile...');
          this.fetchApiData.getUserProfile(username).subscribe((response: any) => {
-            console.log('API response:', response); // Debug log
             this.userProfile = response;
             this.profileForm.patchValue({
                username: this.userProfile.username,
@@ -57,11 +55,9 @@ export class UserProfileComponent implements OnInit {
 
    onSubmit(): void {
       const username = localStorage.getItem('username');
-      console.log('Retrieved username from localStorage for update:', username); // Debug log
 
       if (username) {
          this.fetchApiData.updateUserProfile(username, this.profileForm.value).subscribe(() => {
-            console.log('User profile updated successfully'); // Debug log
             this.getUserProfile();
             this.toggleEditMode();
          }, error => {
@@ -77,11 +73,12 @@ export class UserProfileComponent implements OnInit {
       if (username) {
          if (confirm('Are you sure you want to delete your account?')) {
             this.fetchApiData.deleteUserAccount(username).subscribe(() => {
-               // Handle account deletion (e.g., redirect to welcome page)
+               localStorage.removeItem('username'); // Remove username from localStorage
+               this.router.navigate(['/welcome']); // Redirect to welcome page
             });
          }
       } else {
-         console.error('Username not found');
+         console.error('Error deleting account');
       }
    }
 }

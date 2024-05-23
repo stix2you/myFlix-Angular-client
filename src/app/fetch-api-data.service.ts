@@ -20,7 +20,6 @@ export class FetchApiDataService {
 
    // Making the api call for the user registration endpoint, public so it can be accessed by the registration component
    public userRegistration(userDetails: any): Observable<any> {
-      console.log(userDetails);
       return this.http.post(apiUrl + 'users', userDetails).pipe(
          catchError(this.handleError)
       );
@@ -112,7 +111,6 @@ export class FetchApiDataService {
 
    getOneMovie(title: string): Observable<any> {
       const token = localStorage.getItem('token');
-      console.log('Fetching movie details for Title:', title);
       return this.http.get(`${apiUrl}movies/${title}`, {
          headers: new HttpHeaders({
             Authorization: 'Bearer ' + token,
@@ -199,7 +197,6 @@ export class FetchApiDataService {
          })
       }).pipe(
          map((response: any) => {
-            console.log('API Response:', response);
             return response || {};
          }),
          catchError(this.handleError)
@@ -262,6 +259,6 @@ export class FetchApiDataService {
       }
 
       return throwError(
-         'Something bad happened; please try again later.');
+         'Operation failed; please try again later.');
    }
 }

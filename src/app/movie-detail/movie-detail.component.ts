@@ -25,7 +25,6 @@ export class MovieDetailComponent implements OnInit {
 
    ngOnInit(): void {
       const movieTitle = this.route.snapshot.paramMap.get('title');
-      console.log('Movie Title:', movieTitle);
       if (movieTitle) {
          this.getMovieDetails(movieTitle);
       } else {
@@ -55,17 +54,8 @@ export class MovieDetailComponent implements OnInit {
       });
    }
 
-   // viewGenre(genre: string): void {
-   //    this.fetchApiData.getGenreInfo(genre).subscribe((response: any) => {
-   //       console.log('Genre Info:', response);
-   //       // Display genre info (use a modal or another method to show the info)
-   //    }, (error) => {
-   //       console.error('Error fetching genre info:', error);
-   //    });
-   // }
    viewGenre(genre: string): void {
       this.fetchApiData.getGenreInfo(genre).subscribe((response: any) => {  // Fetch genre info from the API
-         console.log('Genre Info:', response);        // Log the genre info to the console, we are getting this info from the API
          this.dialog.open(GenreInfoComponent, {   // Open the dialog component
             data: { genre: response },                     // Pass the genre info to the dialog component
             panelClass: 'custom-dialog-container'
@@ -78,18 +68,8 @@ export class MovieDetailComponent implements OnInit {
       });
    }
 
-   // viewDirector(director: string): void {
-   //    this.fetchApiData.getDirectorInfo(director).subscribe((response: any) => {
-   //       console.log('Director Info:', response);
-   //       // Display director info (use a modal or another method to show the info)
-   //    }, (error) => {
-   //       console.error('Error fetching director info:', error);
-   //    });
-   // }
-
    viewDirector(director: string): void {
       this.fetchApiData.getDirectorInfo(director).subscribe((response: any) => {
-         console.log('Director Info:', response);
          this.dialog.open(DirectorInfoComponent, {
             data: { director: response },
             panelClass: 'custom-dialog-container'
