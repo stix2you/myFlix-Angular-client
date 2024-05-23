@@ -1,4 +1,3 @@
-// src/app/movie-card/movie-card.component.ts
 import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { MatSnackBar } from '@angular/material/snack-bar';

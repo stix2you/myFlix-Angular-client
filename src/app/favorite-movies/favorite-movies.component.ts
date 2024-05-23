@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
    selector: 'app-favorite-movies',
@@ -13,16 +14,38 @@ export class FavoriteMoviesComponent implements OnInit {
    searchTerm: string = '';
    sortOrder: string = 'title-asc';
    limit: number = 50;
+   @Input() title: string = '';  // @Input decorator means the parent component can pass data to it
+   fontClass: string = '';
 
    constructor(
       private fetchApiData: FetchApiDataService,
-      public snackBar: MatSnackBar
+      public snackBar: MatSnackBar,
+      private router: Router
    ) { }
 
+   // This method will fetch the favorite movies when the Angular is done creating the component
    ngOnInit(): void {
       this.getFavoriteMovies();
    }
 
+   // This method will determine the font size of the movie titles based on their length
+   getFontClass(title: string): string {
+      const textLength = title.length;
+      let fontClass: string;
+
+      if (textLength > 50) {
+         fontClass = 'small-font';
+      } else if (textLength > 20) {
+         fontClass = 'medium-font';
+      } else {
+         fontClass = 'large-font';
+      }
+
+      console.log(`Title: ${title}, Length: ${textLength}, Font Class: ${fontClass}`);
+      return fontClass;
+   }
+
+   // This method will fetch the favorite movies from the API using the FetchApiDataService
    getFavoriteMovies(): void {
       const username = localStorage.getItem('username');
       console.log('Fetching user profile for username:', username);
@@ -86,6 +109,10 @@ export class FavoriteMoviesComponent implements OnInit {
    onLimitChange(limit: number): void {
       this.limit = limit;
       this.applyFilters();
+   }
+
+   viewDetails(movieId: string): void {
+      this.router.navigate(['movie', movieId]);
    }
 
    removeFromFavorites(movie: any): void {
