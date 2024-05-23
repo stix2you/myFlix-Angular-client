@@ -3,6 +3,17 @@
    justify-content: center;
    align-items: center;
    height: 100vh;
+   padding: 3rem;
+}
+
+.profile-card {
+   border-radius: 10px;
+   padding: 2rem;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-button {
+   margin: 0.5rem;
 }
 
 mat-card {
@@ -12,4 +23,5 @@ mat-card {
 
 mat-form-field {
    width: 100%;
+   padding: 0.5rem;
 }

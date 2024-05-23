@@ -1,5 +1,5 @@
 <div class="profile-container">
-   <mat-card>
+   <mat-card class="profile-card">
       <mat-card-title>User Profile</mat-card-title>
       <mat-card-content>
          <div *ngIf="!editMode; else editForm">
@@ -28,9 +28,9 @@
                   <input matInput formControlName="password" type="password" />
                   <mat-hint>Leave blank if no changes</mat-hint>
                </mat-form-field>
-               <button mat-raised-button color="primary" type="submit">Submit Changes</button>
-               <button mat-raised-button color="warn" type="button" (click)="onDelete()">Delete Account</button>
-               <button mat-raised-button type="button" (click)="toggleEditMode()">Back</button>
+               <button mat-raised-button class="profile-button" color="primary" type="submit">Submit Changes</button>
+               <button mat-raised-button class="profile-button" color="warn" type="button" (click)="onDelete()">Delete Account</button>
+               <button mat-raised-button class="profile-button" type="button" (click)="toggleEditMode()">Back</button>
             </form>
          </ng-template>
       </mat-card-content>
