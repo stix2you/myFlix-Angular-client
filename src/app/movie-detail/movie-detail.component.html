@@ -1,0 +1,19 @@
+<mat-card class="movie-detail-card">
+   <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">
+   <mat-card-content>
+      <mat-card-title>{{ movie.Title }}</mat-card-title>
+      <mat-card-subtitle>{{ movie.ReleaseYear }}</mat-card-subtitle>
+      <p>Rating: {{ movie.Rating }}</p>
+      <p>Runtime: {{ movie.Runtime }}</p>
+      <p>Genres: <span *ngFor="let genre of movie.Genres; let last = last">
+            <a href="#" (click)="viewGenre(genre)">{{ genre }}</a><span *ngIf="!last"> / </span>
+         </span></p>
+      <p>Director: <a href="#" (click)="viewDirector(movie.Director)">{{ movie.Director }}</a></p>
+      <p>Starring: {{ movie.Actors?.join(', ') }}</p>
+      <p>{{ movie.Description }}</p>
+      <button mat-button (click)="goBack()">Back</button>
+      <button mat-icon-button color="primary" (click)="addToFavorites(movie)">
+         <mat-icon>favorite</mat-icon>
+      </button>
+   </mat-card-content>
+</mat-card>

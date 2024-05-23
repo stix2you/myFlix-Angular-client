@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 // this component will render the movies in the database on a main page
 // the list will be sortable by title, genre, director, actor, and year.  It will be filterable by these same categories.
@@ -21,7 +22,11 @@ export class MovieCardComponent implements OnInit {
    limit: number = 50;
 
    // constructor for the component that will call the necessary functions for the component to work
-   constructor(public fetchApiData: FetchApiDataService, public snackBar: MatSnackBar) { }
+   constructor(
+      public fetchApiData: FetchApiDataService,
+      public snackBar: MatSnackBar,
+      private router: Router
+   ) { }
 
    // This method will fetch the movies when the Angular is done creating the component
    ngOnInit(): void {
@@ -77,6 +82,9 @@ export class MovieCardComponent implements OnInit {
       this.applyFilters();
    }
 
+   viewDetails(movieId: string): void {
+      this.router.navigate(['movie', movieId]);
+   }
 
 
    addToFavorites(movie: any): void {
