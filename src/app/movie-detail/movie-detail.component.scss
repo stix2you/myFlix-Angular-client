@@ -1,9 +1,13 @@
 .movie-detail-card {
+   position: fixed;
    display: flex;
    justify-content: center;
    align-items: center;
    padding: 2rem;
    margin: 2rem;
+   margin-top: 4rem;
+   border-radius: 10px;
+   box-shadow: 0px 10px 6px rgba(0, 0, 0, 0.5);
 }
 
 .movie-detail-content {
@@ -39,7 +43,7 @@ mat-card-actions {
 
 mat-card-actions {
    display: flex;
-   justify-content: space-between;
+   justify-content: left;
 }
 
 @media (max-width: 900px) {

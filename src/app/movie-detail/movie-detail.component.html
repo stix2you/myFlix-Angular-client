@@ -15,7 +15,7 @@
             <p>{{ movie.Description }}</p>
          </mat-card-content>
          <mat-card-actions>
-            <button mat-button (click)="goBack()">Back</button>
+            <button mat-raised-button color="primary" (click)="goBack()">Back</button>
             <button mat-icon-button color="warn" (click)="addToFavorites(movie)">
                <mat-icon>favorite</mat-icon>
             </button>
