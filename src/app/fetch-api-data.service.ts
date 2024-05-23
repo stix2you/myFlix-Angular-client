@@ -1,17 +1,16 @@
 // This file is where you create all the API calls for the client app
 
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://stix2you-myflix-5cbcd3c20372.herokuapp.com/';
+
 @Injectable({
    providedIn: 'root'
 })
-
 
 export class FetchApiDataService {
    // Inject the HttpClient module to the constructor params
@@ -64,6 +63,30 @@ export class FetchApiDataService {
             Authorization: 'Bearer ' + token,
          })
       }).pipe(
+         catchError(this.handleError)
+      );
+   }
+
+   public getGenreInfo(genre: string): Observable<any> {
+      const token = localStorage.getItem('token');
+      return this.http.get(`${apiUrl}genres/${genre}`, {
+         headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+         })
+      }).pipe(
+         map(this.extractResponseData),
+         catchError(this.handleError)
+      );
+   }
+
+   public getDirectorInfo(director: string): Observable<any> {
+      const token = localStorage.getItem('token');
+      return this.http.get(`${apiUrl}directors/${director}`, {
+         headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+         })
+      }).pipe(
+         map(this.extractResponseData),
          catchError(this.handleError)
       );
    }
@@ -227,18 +250,18 @@ export class FetchApiDataService {
 
    private handleError(error: HttpErrorResponse): Observable<any> {
       if (error.status === 200) {
-        return of({});
+         return of({});
       }
-  
+
       if (error.error instanceof ErrorEvent) {
-        console.error('An error occurred:', error.error.message);
+         console.error('An error occurred:', error.error.message);
       } else {
-        console.error(
-          `Backend returned code ${error.status}, ` +
-          `body was: ${JSON.stringify(error.error)}`);
+         console.error(
+            `Backend returned code ${error.status}, ` +
+            `body was: ${JSON.stringify(error.error)}`);
       }
-  
+
       return throwError(
-        'Something bad happened; please try again later.');
-    }
+         'Something bad happened; please try again later.');
+   }
 }

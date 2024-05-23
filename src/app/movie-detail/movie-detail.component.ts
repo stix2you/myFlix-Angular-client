@@ -51,11 +51,21 @@ export class MovieDetailComponent implements OnInit {
    }
 
    viewGenre(genre: string): void {
-      // Implement genre view logic here
+      this.fetchApiData.getGenreInfo(genre).subscribe((response: any) => {
+         console.log('Genre Info:', response);
+         // Display genre info (use a modal or another method to show the info)
+      }, (error) => {
+         console.error('Error fetching genre info:', error);
+      });
    }
 
    viewDirector(director: string): void {
-      // Implement director view logic here
+      this.fetchApiData.getDirectorInfo(director).subscribe((response: any) => {
+         console.log('Director Info:', response);
+         // Display director info (use a modal or another method to show the info)
+      }, (error) => {
+         console.error('Error fetching director info:', error);
+      });
    }
 
    goBack(): void {

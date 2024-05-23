@@ -41,6 +41,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { FavoriteMoviesComponent } from './favorite-movies/favorite-movies.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import { DirectorInfoComponent } from './director-info/director-info.component';
+import { GenreInfoComponent } from './genre-info/genre-info.component';
 
 // Define the routes for the application
 const appRoutes: Routes = [
@@ -62,7 +64,9 @@ const appRoutes: Routes = [
       NavBarComponent,
       SearchFilterComponent,
       FavoriteMoviesComponent,
-      MovieDetailComponent
+      MovieDetailComponent,
+      DirectorInfoComponent,
+      GenreInfoComponent
    ],
    imports: [         // Modules that are imported by this module
       BrowserModule,

@@ -1,5 +1,10 @@
-.clickable {
-   color: blue;
+a {
    text-decoration: underline;
+   color: blue;
    cursor: pointer;
-}
+ }
+ 
+ a:hover {
+   text-decoration: none;
+ }
+ 

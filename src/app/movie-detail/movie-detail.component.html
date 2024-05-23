@@ -1,19 +1,22 @@
-<mat-card class="movie-detail-card">
+<!-- src/app/movie-detail/movie-detail.component.html -->
+<mat-card>
    <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">
+   <mat-card-title>{{ movie.Title }}</mat-card-title>
+   <mat-card-subtitle>{{ movie.ReleaseYear }} | {{ movie.Rating }} | {{ movie.Runtime }}</mat-card-subtitle>
    <mat-card-content>
-      <mat-card-title>{{ movie.Title }}</mat-card-title>
-      <mat-card-subtitle>{{ movie.ReleaseYear }}</mat-card-subtitle>
-      <p>Rating: {{ movie.Rating }}</p>
-      <p>Runtime: {{ movie.Runtime }}</p>
-      <p>Genres: <span *ngFor="let genre of movie.Genres; let last = last">
-            <a href="#" (click)="viewGenre(genre)">{{ genre }}</a><span *ngIf="!last"> / </span>
-         </span></p>
-      <p>Director: <a href="#" (click)="viewDirector(movie.Director)">{{ movie.Director }}</a></p>
-      <p>Starring: {{ movie.Actors?.join(', ') }}</p>
+      <p><strong>Genres:</strong>
+         <span *ngFor="let genre of movie.Genres; let isLast = last">
+            <a (click)="viewGenre(genre)">{{ genre }}</a><span *ngIf="!isLast"> / </span>
+         </span>
+      </p>
+      <p><strong>Director:</strong> <a (click)="viewDirector(movie.Director)">{{ movie.Director }}</a></p>
+      <p><strong>Starring:</strong> {{ movie.Actors?.join(', ') }}</p>
       <p>{{ movie.Description }}</p>
+   </mat-card-content>
+   <mat-card-actions>
       <button mat-button (click)="goBack()">Back</button>
       <button mat-icon-button color="primary" (click)="addToFavorites(movie)">
          <mat-icon>favorite</mat-icon>
       </button>
-   </mat-card-content>
+   </mat-card-actions>
 </mat-card>
