@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
@@ -87,13 +87,13 @@ export class FetchApiDataService {
       return body || {};
    }
 
-   getOneMovie(type: String): Observable<any> {
+   getOneMovie(title: string): Observable<any> {
       const token = localStorage.getItem('token');
-      return this.http.get(apiUrl + `movies/${type}`, {
-         headers: new HttpHeaders(
-            {
-               Authorization: 'Bearer ' + token,
-            })
+      console.log('Fetching movie details for Title:', title);
+      return this.http.get(`${apiUrl}movies/${title}`, {
+         headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+         })
       }).pipe(
          map(this.extractResponseData),
          catchError(this.handleError)
@@ -154,10 +154,10 @@ export class FetchApiDataService {
       );
    }
 
-   public addFavoriteMovie(movieId: string): Observable<any> {
+   public addFavoriteMovie(title: string): Observable<any> {
       const token = localStorage.getItem('token');
       const username = localStorage.getItem('username'); // Ensure correct retrieval of username
-      return this.http.post(`${apiUrl}users/${username}/movies/${movieId}`, {}, {
+      return this.http.post(`${apiUrl}users/${username}/movies/${title}`, {}, {
          headers: new HttpHeaders({
             Authorization: 'Bearer ' + token,
          })
@@ -167,15 +167,18 @@ export class FetchApiDataService {
       );
    }
 
-   public removeFavoriteMovie(movieId: string): Observable<any> {
+   public removeFavoriteMovie(title: string): Observable<any> {
       const token = localStorage.getItem('token');
       const username = localStorage.getItem('username');
-      return this.http.delete(`${apiUrl}users/${username}/movies/${movieId}`, {
+      return this.http.delete(`${apiUrl}users/${username}/movies/${title}`, {
          headers: new HttpHeaders({
             Authorization: 'Bearer ' + token,
          })
       }).pipe(
-         map(this.extractResponseData),
+         map((response: any) => {
+            console.log('API Response:', response);
+            return response || {};
+         }),
          catchError(this.handleError)
       );
    }
@@ -208,10 +211,10 @@ export class FetchApiDataService {
       );
    }
 
-   deleteFavoriteMovie(movie: any): Observable<any> {
+   deleteFavoriteMovie(title: any): Observable<any> {
       const token = localStorage.getItem('token');
       const username = localStorage.getItem('user');
-      return this.http.delete(apiUrl + `users/${username}/movies/${movie.Title}`, {
+      return this.http.delete(apiUrl + `users/${username}/movies/${title}`, {
          headers: new HttpHeaders(
             {
                Authorization: 'Bearer ' + token,
@@ -222,15 +225,20 @@ export class FetchApiDataService {
       );
    }
 
-   private handleError(error: HttpErrorResponse): any {
-      if (error.error instanceof ErrorEvent) {
-         console.error('Some error occurred:', error.error.message);
-      } else {
-         console.error(
-            `Error Status code ${error.status}, ` +
-            `Error body is: ${error.error}`);
+   private handleError(error: HttpErrorResponse): Observable<any> {
+      if (error.status === 200) {
+        return of({});
       }
+  
+      if (error.error instanceof ErrorEvent) {
+        console.error('An error occurred:', error.error.message);
+      } else {
+        console.error(
+          `Backend returned code ${error.status}, ` +
+          `body was: ${JSON.stringify(error.error)}`);
+      }
+  
       return throwError(
-         'Something bad happened; please try again later.');
-   }
+        'Something bad happened; please try again later.');
+    }
 }

@@ -1,0 +1,18 @@
+/* src/app/favorite-movies/favorite-movies.component.css */
+.favorite-movies {
+   padding-top: 110px;
+   /* Adjust based on the height of the navbar and search-filter card */
+   padding: 1rem;
+}
+
+.movie-list {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1rem;
+}
+
+.no-favorites-message {
+   font-size: 1.2rem;
+   text-align: center;
+   margin-top: 2rem;
+}

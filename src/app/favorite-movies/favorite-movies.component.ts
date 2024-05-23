@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
    styleUrls: ['./favorite-movies.component.scss']
 })
 export class FavoriteMoviesComponent implements OnInit {
-   movies: any[] = [];
+   favorites: any[] = [];
    filteredMovies: any[] = [];
    searchTerm: string = '';
    sortOrder: string = 'title-asc';
@@ -25,16 +25,32 @@ export class FavoriteMoviesComponent implements OnInit {
 
    getFavoriteMovies(): void {
       const username = localStorage.getItem('username');
+      console.log('Fetching user profile for username:', username);
       if (username) {
          this.fetchApiData.getUserProfile(username).subscribe((response: any) => {
-            this.movies = response.favorite_movies;
+            console.log('User profile response:', response);
+            const favoriteMovieTitles = response.favorite_movies;
+            console.log('Favorite movie titles:', favoriteMovieTitles);
+            this.favorites = [];
+            favoriteMovieTitles.forEach((title: string) => {
+               console.log('Fetching movie details for title:', title);
+               this.fetchApiData.getOneMovie(title).subscribe(
+                  (movie: any) => {
+                     console.log('Fetched movie details:', movie);
+                     this.favorites.push(movie);
+                     this.applyFilters(); // Apply filters after fetching all movies
+                  },
+                  (error) => {
+                     console.error('Error fetching movie details:', error);
+                  }
+               );
+            });
          });
       }
    }
 
-
    applyFilters(): void {
-      let movies = this.movies;
+      let movies = [...this.favorites];
 
       // Filter by search term
       if (this.searchTerm) {
@@ -54,6 +70,7 @@ export class FavoriteMoviesComponent implements OnInit {
 
       // Limit movies
       this.filteredMovies = movies.slice(0, this.limit);
+      console.log('Filtered movies after applying filters:', this.filteredMovies);
    }
 
    onSearch(term: string): void {
@@ -71,14 +88,15 @@ export class FavoriteMoviesComponent implements OnInit {
       this.applyFilters();
    }
 
-
    removeFromFavorites(movie: any): void {
-      this.fetchApiData.removeFavoriteMovie(movie._id).subscribe((response) => {
+      console.log(`Attempting to remove movie from favorites: ${movie.Title}`);
+      this.fetchApiData.removeFavoriteMovie(movie.Title).subscribe((response) => {
          this.snackBar.open(`${movie.Title} has been removed from your favorites!`, 'OK', {
             duration: 2000
          });
-         this.getFavoriteMovies();
+         this.getFavoriteMovies(); // Refresh favorites after removing one
       }, (error) => {
+         console.error('Error removing movie from favorites:', error);
          this.snackBar.open('Failed to remove from favorites', 'OK', {
             duration: 2000
          });
