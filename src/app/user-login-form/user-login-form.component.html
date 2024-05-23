@@ -3,18 +3,19 @@
       <mat-card-title>Log In!</mat-card-title>
    </mat-card-header>
    <mat-card-content>
-      <form #loginForm="ngForm">
+      <form #loginForm="ngForm" aria-labelledby="login-form-title">
          <mat-form-field class="full-width">
-            <input matInput [(ngModel)]="userData.username" placeholder="Username" type="text" name="username" required>
+            <input matInput [(ngModel)]="userData.username" placeholder="Username" type="text" name="username" required
+               aria-required="true" aria-label="Username">
          </mat-form-field>
          <mat-form-field class="full-width">
             <input matInput [(ngModel)]="userData.password" type="password" placeholder="Password" name="password"
-               required>
+               required aria-required="true" aria-label="Password">
          </mat-form-field>
       </form>
    </mat-card-content>
    <mat-card-actions>
-      <button mat-raised-button (click)="loginUser()" color="primary" class="action-button">
+      <button mat-raised-button (click)="loginUser()" color="primary" class="action-button" aria-label="Login">
          Login
       </button>
    </mat-card-actions>

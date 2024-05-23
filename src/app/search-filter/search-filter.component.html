@@ -1,33 +1,43 @@
 <mat-card class="search-filter-card">
-   <button mat-raised-button color="primary" class="toggle-button" (click)="toggleFilters()">
+   <button mat-raised-button color="primary" class="toggle-button" (click)="toggleFilters()"
+      [attr.aria-expanded]="showFilters" aria-controls="filter-forms" aria-label="Toggle search and filter options">
       Search / Filter
    </button>
-   <div class="filter-forms" [ngClass]="{'show': !isScreenSmall || showFilters}">
-      <form (ngSubmit)="onSearch()" class="filter-form">
+   <div class="filter-forms" [ngClass]="{'show': !isScreenSmall || showFilters}" id="filter-forms">
+      <form (ngSubmit)="onSearch()" class="filter-form" aria-labelledby="search-form-label">
          <mat-form-field class="filter-form-field">
-            <mat-label>Search Movies</mat-label>
-            <input matInput [(ngModel)]="searchTerm" name="searchTerm" />
+            <mat-label id="search-form-label">Search Movies</mat-label>
+            <input matInput [(ngModel)]="searchTerm" name="searchTerm" aria-required="true"
+               aria-label="Search movies by title" />
          </mat-form-field>
-         <button class="filter-form-button" mat-raised-button color="primary" type="submit">Search</button>
+         <button class="filter-form-button" mat-raised-button color="primary" type="submit" aria-label="Submit search">
+            Search
+         </button>
       </form>
-      <form (ngSubmit)="onSort()" class="filter-form">
+      <form (ngSubmit)="onSort()" class="filter-form" aria-labelledby="sort-form-label">
          <mat-form-field class="filter-form-field">
-            <mat-label>Sort By</mat-label>
-            <mat-select [(ngModel)]="sortOrder" name="sortOrder">
+            <mat-label id="sort-form-label">Sort By</mat-label>
+            <mat-select [(ngModel)]="sortOrder" name="sortOrder" aria-required="true"
+               aria-label="Sort movies by title or year">
                <mat-option value="title-asc">Title Ascending</mat-option>
                <mat-option value="title-desc">Title Descending</mat-option>
                <mat-option value="year-asc">Year Ascending</mat-option>
                <mat-option value="year-desc">Year Descending</mat-option>
             </mat-select>
          </mat-form-field>
-         <button class="filter-form-button" mat-raised-button color="primary" type="submit">Sort</button>
+         <button class="filter-form-button" mat-raised-button color="primary" type="submit" aria-label="Submit sorting">
+            Sort
+         </button>
       </form>
-      <form (ngSubmit)="onLimit()" class="filter-form">
+      <form (ngSubmit)="onLimit()" class="filter-form" aria-labelledby="limit-form-label">
          <mat-form-field class="filter-form-field">
-            <mat-label>Number to Display</mat-label>
-            <input matInput [(ngModel)]="limit" name="limit" type="number" />
+            <mat-label id="limit-form-label">Number to Display</mat-label>
+            <input matInput [(ngModel)]="limit" name="limit" type="number" aria-required="true"
+               aria-label="Set number of movies to display" />
          </mat-form-field>
-         <button class="filter-form-button" mat-raised-button color="primary" type="submit">Set Limit</button>
+         <button class="filter-form-button" mat-raised-button color="primary" type="submit" aria-label="Submit limit">
+            Set Limit
+         </button>
       </form>
    </div>
 </mat-card>

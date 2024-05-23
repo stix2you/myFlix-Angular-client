@@ -1,22 +1,22 @@
-<mat-card class="movie-detail-card">
+<mat-card class="movie-detail-card" role="article" [attr.aria-label]="'Movie Details: ' + movie.Title">
    <div class="movie-detail-content">
-      <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}" class="movie-image">
+      <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }} Poster" class="movie-image">
       <div class="movie-details">
          <mat-card-title>{{ movie.Title }}</mat-card-title>
          <mat-card-subtitle>{{ movie.ReleaseYear }} | {{ movie.Rating }} | {{ movie.Runtime }}</mat-card-subtitle>
          <mat-card-content>
             <p><strong>Genres:</strong>
                <span *ngFor="let genre of movie.Genres; let isLast = last">
-                  <a (click)="viewGenre(genre)">{{ genre }}</a><span *ngIf="!isLast"> / </span>
+                  <a href="#" (click)="viewGenre(genre)" [attr.aria-label]="'View details for genre: ' + genre">{{ genre }}</a><span *ngIf="!isLast"> / </span>
                </span>
             </p>
-            <p><strong>Director:</strong> <a (click)="viewDirector(movie.Director)">{{ movie.Director }}</a></p>
+            <p><strong>Director:</strong> <a href="#" (click)="viewDirector(movie.Director)" [attr.aria-label]="'View details for director: ' + movie.Director">{{ movie.Director }}</a></p>
             <p><strong>Starring:</strong> {{ movie.Actors?.join(', ') }}</p>
             <p>{{ movie.Description }}</p>
          </mat-card-content>
          <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="goBack()">Back</button>
-            <button mat-icon-button color="warn" matTooltip="Add to Favorites" (click)="addToFavorites(movie)">
+            <button mat-raised-button color="primary" (click)="goBack()" aria-label="Go back to previous page">Back</button>
+            <button mat-icon-button color="warn" matTooltip="Add to Favorites" (click)="addToFavorites(movie)" [attr.aria-label]="'Add ' + movie.Title + ' to Favorites'">
                <mat-icon>favorite</mat-icon>
             </button>
          </mat-card-actions>

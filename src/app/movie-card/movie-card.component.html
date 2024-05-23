@@ -1,22 +1,26 @@
 <div class="main-content">
-   <app-search-filter (search)="onSearch($event)" (sort)="onSort($event)"
+   <app-search-filter aria-label="Search and Filter Movies" (search)="onSearch($event)" (sort)="onSort($event)"
       (limitChange)="onLimitChange($event)"></app-search-filter>
 
-   <div class="movie-list-container">
+   <div class="movie-list-container" role="region" aria-label="Movie List">
       <div class="movie-list">
-         <mat-card *ngFor="let movie of filteredMovies; let i=index" class="movie-card">
+         <mat-card *ngFor="let movie of filteredMovies; let i=index" class="movie-card" tabindex="0" role="article"
+            aria-label="Movie Card">
             <mat-card-header class="movie-card-header">
                <mat-card-title [ngClass]="getFontClass(movie.Title)">
                   {{ movie.Title }}
                </mat-card-title>
             </mat-card-header>
-            <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }}">
+            <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }} Poster">
             <mat-card-actions class="movie-card-actions">
-               <button mat-icon-button color="warn" matTooltip="Add to Favorites" (click)="addToFavorites(movie)">
+               <button mat-icon-button color="warn" matTooltip="Add to Favorites" (click)="addToFavorites(movie)"
+                  [attr.aria-label]="'Add ' + movie.Title + ' to Favorites'">
                   <mat-icon>favorite</mat-icon>
                </button>
-               <button mat-raised-button color="primary" class="large-details-button"
-                  (click)="viewDetails(movie.Title)">Details</button>
+               <button mat-raised-button color="primary" class="large-details-button" (click)="viewDetails(movie.Title)"
+                  [attr.aria-label]="'View details of ' + movie.Title">
+                  Details
+               </button>
             </mat-card-actions>
          </mat-card>
       </div>

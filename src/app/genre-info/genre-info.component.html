@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Genre Information</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title id="genre-dialog-title">Genre Information</h1>
+<div mat-dialog-content role="document" aria-labelledby="genre-dialog-title">
    <p><strong>Genre:</strong> {{ data.genre.name }}</p>
    <p><strong>Description:</strong> {{ data.genre.description }}</p>
 </div>
 <div mat-dialog-actions>
-   <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+   <button mat-raised-button color="primary" mat-dialog-close aria-label="Close dialog">Close</button>
 </div>

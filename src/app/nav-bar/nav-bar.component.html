@@ -1,12 +1,11 @@
-<!-- src/app/nav-bar/nav-bar.component.html -->
-<nav *ngIf="isLoggedIn()" class="navbar">
+<nav *ngIf="isLoggedIn()" class="navbar" role="navigation" aria-label="Main Navigation">
    <div class="navbar-brand">
-      <a routerLink="/movies" class="navbar-item">MyFlix App</a>
+      <a routerLink="/movies" class="navbar-item" aria-label="MyFlix App Home">MyFlix App</a>
    </div>
-   <div class="navbar-menu">
-      <a routerLink="/movies" class="navbar-item">Home</a>
-      <a routerLink="/profile" class="navbar-item">Profile</a>
-      <a routerLink="/favorites" class="navbar-item">Favorites</a>
-      <a (click)="logout()" class="navbar-item">Logout</a>
+   <div class="navbar-menu" role="menubar">
+      <a routerLink="/movies" class="navbar-item" role="menuitem" aria-label="Home">Home</a>
+      <a routerLink="/profile" class="navbar-item" role="menuitem" aria-label="Profile">Profile</a>
+      <a routerLink="/favorites" class="navbar-item" role="menuitem" aria-label="Favorites">Favorites</a>
+      <a (click)="logout()" class="navbar-item" role="menuitem" aria-label="Logout">Logout</a>
    </div>
 </nav>

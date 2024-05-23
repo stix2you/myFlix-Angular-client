@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>Director Information</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title id="director-dialog-title">Director Information</h1>
+<div mat-dialog-content role="document" aria-labelledby="director-dialog-title">
    <img [src]="data.director.imagePath" alt="{{ data.director.name }}"
       style="width: 100%; max-width: 200px; border-radius: 8px; margin-bottom: 16px;">
    <p><strong>Name:</strong> {{ data.director.name }}</p>
@@ -9,5 +9,5 @@
    <p><strong>Movies:</strong> {{ data.director.movies.join(', ') }}</p>
 </div>
 <div mat-dialog-actions>
-   <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+   <button mat-raised-button color="primary" mat-dialog-close aria-label="Close dialog">Close</button>
 </div>

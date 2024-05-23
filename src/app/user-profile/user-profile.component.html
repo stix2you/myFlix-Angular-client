@@ -2,35 +2,42 @@
    <mat-card class="profile-card">
       <mat-card-title>User Profile</mat-card-title>
       <mat-card-content>
-         <div *ngIf="!editMode; else editForm">
+         <div *ngIf="!editMode; else editForm" aria-live="polite">
             <p><strong>Username:</strong> {{ userProfile.username }}</p>
             <p><strong>Email:</strong> {{ userProfile.email }}</p>
             <p><strong>Birthday:</strong> {{ userProfile.birthday | date }}</p>
             <p><strong>Password:</strong> ********</p>
-            <button mat-raised-button color="primary" (click)="toggleEditMode()">Update Information</button>
+            <button mat-raised-button color="primary" (click)="toggleEditMode()" aria-label="Update Information">
+               Update Information
+            </button>
          </div>
          <ng-template #editForm>
-            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" aria-live="polite"
+               aria-labelledby="edit-profile-form">
                <mat-form-field>
                   <mat-label>Username</mat-label>
-                  <input matInput formControlName="username" />
+                  <input matInput formControlName="username" aria-required="true" aria-label="Edit Username" />
                </mat-form-field>
                <mat-form-field>
                   <mat-label>Email</mat-label>
-                  <input matInput formControlName="email" />
+                  <input matInput formControlName="email" aria-required="true" aria-label="Edit Email" />
                </mat-form-field>
                <mat-form-field>
                   <mat-label>Birthday</mat-label>
-                  <input matInput formControlName="birthday" type="date" />
+                  <input matInput formControlName="birthday" type="date" aria-required="true"
+                     aria-label="Edit Birthday" />
                </mat-form-field>
                <mat-form-field>
                   <mat-label>Password</mat-label>
-                  <input matInput formControlName="password" type="password" />
+                  <input matInput formControlName="password" type="password" aria-label="Edit Password" />
                   <mat-hint>Leave blank if no changes</mat-hint>
                </mat-form-field>
-               <button mat-raised-button class="profile-button" color="primary" type="submit">Submit Changes</button>
-               <button mat-raised-button class="profile-button" color="warn" type="button" (click)="onDelete()">Delete Account</button>
-               <button mat-raised-button class="profile-button" type="button" (click)="toggleEditMode()">Back</button>
+               <button mat-raised-button class="profile-button" color="primary" type="submit"
+                  aria-label="Submit Changes">Submit Changes</button>
+               <button mat-raised-button class="profile-button" color="warn" type="button" (click)="onDelete()"
+                  aria-label="Delete Account">Delete Account</button>
+               <button mat-raised-button class="profile-button" type="button" (click)="toggleEditMode()"
+                  aria-label="Cancel Edit">Back</button>
             </form>
          </ng-template>
       </mat-card-content>
