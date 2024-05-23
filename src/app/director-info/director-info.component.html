@@ -1,1 +1,13 @@
-<p>director-info works!</p>
+<h1 mat-dialog-title>Director Information</h1>
+<div mat-dialog-content>
+   <img [src]="data.director.imagePath" alt="{{ data.director.name }}"
+      style="width: 100%; max-width: 200px; border-radius: 8px; margin-bottom: 16px;">
+   <p><strong>Name:</strong> {{ data.director.name }}</p>
+   <p><strong>Bio:</strong> {{ data.director.bio }}</p>
+   <p><strong>Birth Date:</strong> {{ data.director.birthDate | date }}</p>
+   <p *ngIf="data.director.deathDate"><strong>Death Date:</strong> {{ data.director.deathDate | date }}</p>
+   <p><strong>Movies:</strong> {{ data.director.movies.join(', ') }}</p>
+</div>
+<div mat-dialog-actions>
+   <button mat-button mat-dialog-close>Close</button>
+</div>
