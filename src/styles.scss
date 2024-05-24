@@ -42,11 +42,10 @@ body {
 body {
    margin: 0;
    font-family: Roboto, "Helvetica Neue", sans-serif;
-   background-image: url('/assets/background.webp');
+   background-image: url('../assets/background.webp'); // Use relative path, so that it works in production
    background-size: cover;
    background-position: center;
    background-attachment: fixed;
-   /* This makes the background fixed */
    background-repeat: no-repeat;
 }
 

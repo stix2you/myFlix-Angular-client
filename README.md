@@ -60,25 +60,13 @@ PROJECT SETUP FOR DEV ENVIRONMENT:
 
 
 
----------------------------
-BUILD and DEPLOY TO GHPAGES
----------------------------
+----------------------------
+BUILD and DEPLOY TO GH-PAGES
+----------------------------
 
-1. Create a new repository on GitHub.
+Add angular-cli-ghpages:  ng add angular-cli-ghpages.
 
-2. Link the new remote repository to the local project folder. To do so, simply run this command from inside your project folder (replace <GitHub-username> and <repository-name> with your own GitHub username and repository name): git remote add origin https://github.com/<GitHub-username>/<repository-name>.git
-
-3. Add angular-cli-ghpages by running ng add angular-cli-ghpages.
-
-4. Build your application. To do so, run the following command, replacing <repository-name> with your own repository name: 
-
-   ng deploy --base-href=/<repository-name>/
-
-5. Wait for angular-cli-ghpages to generate the new production code. It will then try to push the code to the gh-pages branch, so it will prompt you to enter your GitHub username and password if you haven't automated the GitHub authentication process before.
-
-6. The application should be published shortly. The URL of your application will be:
-
-   https://<GitHub-username>.github.io/<repository-name>/
+Build command:  ng deploy --base-href=/myFlix-Angular-client/
 
 
 
