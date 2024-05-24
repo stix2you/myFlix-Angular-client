@@ -12,7 +12,7 @@ const routes: Routes = [
    { path: 'favorites', component: FavoriteMoviesComponent },
    { path: 'welcome', component: WelcomePageComponent },
    { path: 'movie/:title', component: MovieDetailComponent },
-   { path: '', redirectTo: 'movies', pathMatch: 'full' },
+   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
 @NgModule({
