@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 
+// This component provides the user profile view
+// It allows users to view and edit their profile information
 @Component({
    selector: 'app-user-profile',
    templateUrl: './user-profile.component.html',
@@ -18,7 +20,7 @@ export class UserProfileComponent implements OnInit {
       private fb: FormBuilder,
       private router: Router
    ) {
-      this.profileForm = this.fb.group({
+      this.profileForm = this.fb.group({   // Define the form group
          username: [''],
          email: [''],
          birthday: [''],
@@ -26,12 +28,14 @@ export class UserProfileComponent implements OnInit {
       });
    }
 
+   // This method will run when the component is initialized, fetching the user profile from the backend 
    ngOnInit(): void {
       this.getUserProfile();
    }
 
+   // This method will fetch the user profile from the backend
    getUserProfile(): void {
-      const username = localStorage.getItem('username');
+      const username = localStorage.getItem('username');  // Get username from localStorage
 
       if (username) {
          this.fetchApiData.getUserProfile(username).subscribe((response: any) => {
@@ -49,10 +53,12 @@ export class UserProfileComponent implements OnInit {
       }
    }
 
+   // This method will toggle the edit mode for the profile form
    toggleEditMode(): void {
       this.editMode = !this.editMode;
    }
 
+   // This method will submit the updated profile form
    onSubmit(): void {
       const username = localStorage.getItem('username');
 
@@ -68,6 +74,7 @@ export class UserProfileComponent implements OnInit {
       }
    }
 
+   // This method will delete the user account
    onDelete(): void {
       const username = localStorage.getItem('username');
       if (username) {

@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+// This component provides the user registration form
 @Component({
    selector: 'app-user-registration-form',
    templateUrl: './user-registration-form.component.html',
@@ -10,8 +11,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserRegistrationFormComponent implements OnInit {
 
+   // This will hold the input values from the form
    @Input() userData = { username: '', password: '', email: '', birthday: '' };
 
+   // Inject the necessary services for the component
    constructor(
       public fetchApiData: FetchApiDataService,
       public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -19,6 +22,7 @@ export class UserRegistrationFormComponent implements OnInit {
 
    ngOnInit(): void { }
 
+   // This method will send the form inputs to the backend
    registerUser(): void {
       if (this.isValidForm()) {
          this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
@@ -44,6 +48,7 @@ export class UserRegistrationFormComponent implements OnInit {
       }
    }
 
+   // This method will check if the form is valid before sending the form
    isValidForm(): boolean {
       return this.userData.username.length >= 8 &&
          this.userData.password.length >= 8 &&
@@ -51,13 +56,15 @@ export class UserRegistrationFormComponent implements OnInit {
          this.isValidDate(this.userData.birthday);
    }
 
+   // This method will check if the email is valid
    isValidEmail(email: string): boolean {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\.,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,})$/i;
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;   // regex for email validation
       return re.test(String(email).toLowerCase());
    }
 
+   // This method will check if the date is valid
    isValidDate(date: string): boolean {
       const parsedDate = Date.parse(date);
-      return !isNaN(parsedDate);
+      return !isNaN(parsedDate);   // returns false if the date is invalid
    }
 }
