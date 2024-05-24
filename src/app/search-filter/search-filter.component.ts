@@ -18,34 +18,39 @@ export class SearchFilterComponent {
 
    constructor() { }
 
+   // the following ngOnInit, listener, and functions are all to handle the toggle of the filter section on small screens
    ngOnInit(): void {
       this.checkScreenWidth();
    }
 
+   // Listen for window resize event
    @HostListener('window:resize', ['$event'])
    onResize(event: any): void {
       this.checkScreenWidth();
    }
 
+   // Check screen width on page
    checkScreenWidth(): void {
       this.isScreenSmall = window.innerWidth < 950;
       if (!this.isScreenSmall) {
-         this.showFilters = false; // Reset filters visibility when screen is large
+         this.showFilters = false; // Reset filters visibility when screen is large!
       }
    }
 
+   // Toggle filters visibility in the html/dom
    toggleFilters(): void {
       this.showFilters = !this.showFilters;
    }
 
+   // Emit is used to send data from the child component to the parent component
+   // Needed in this case because the parent component, movie-card, will handle the 
+   // actual filtering, sorting, and limiting of the data
    onSearch(): void {
       this.search.emit(this.searchTerm);
    }
-
    onSort(): void {
       this.sort.emit(this.sortOrder);
    }
-
    onLimit(): void {
       this.limitChange.emit(this.limit);
    }

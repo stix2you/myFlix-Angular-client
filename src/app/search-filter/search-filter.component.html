@@ -1,9 +1,16 @@
+<!-- Render the Search/Filter card just below the navbar -->
 <mat-card class="search-filter-card">
+
+   <!-- Toggle button appears for small screen widths to show/hide search/filter functions -->
    <button mat-raised-button color="primary" class="toggle-button" (click)="toggleFilters()"
       [attr.aria-expanded]="showFilters" aria-controls="filter-forms" aria-label="Toggle search and filter options">
       Search / Filter
    </button>
+
+   <!-- Three forms w/in container: Search, Sort, and Limit (Number of Listings) -->
    <div class="filter-forms" [ngClass]="{'show': !isScreenSmall || showFilters}" id="filter-forms">
+      
+      <!-- Search -->
       <form (ngSubmit)="onSearch()" class="filter-form" aria-labelledby="search-form-label">
          <mat-form-field class="filter-form-field">
             <mat-label id="search-form-label">Search Movies</mat-label>
@@ -14,6 +21,8 @@
             Search
          </button>
       </form>
+
+      <!-- Sort -->
       <form (ngSubmit)="onSort()" class="filter-form" aria-labelledby="sort-form-label">
          <mat-form-field class="filter-form-field">
             <mat-label id="sort-form-label">Sort By</mat-label>
@@ -29,6 +38,8 @@
             Sort
          </button>
       </form>
+
+      <!-- Limit -->
       <form (ngSubmit)="onLimit()" class="filter-form" aria-labelledby="limit-form-label">
          <mat-form-field class="filter-form-field">
             <mat-label id="limit-form-label">Number to Display</mat-label>
@@ -39,5 +50,6 @@
             Set Limit
          </button>
       </form>
+
    </div>
 </mat-card>

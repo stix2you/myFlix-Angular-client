@@ -1,6 +1,12 @@
+<!-- Render the Movie Details card just below the navbar
+*** Three sections: Image, Information, and Actions (buttons) ... view is split: Image Left, Info/Buttons Right-->
 <mat-card class="movie-detail-card" role="article" [attr.aria-label]="'Movie Details: ' + movie.Title">
    <div class="movie-detail-content">
+
+      <!-- Image -->
       <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }} Poster" class="movie-image">
+
+      <!-- Information -->
       <div class="movie-details">
          <mat-card-title>{{ movie.Title }}</mat-card-title>
          <mat-card-subtitle>{{ movie.ReleaseYear }} | {{ movie.Rating }} | {{ movie.Runtime }}</mat-card-subtitle>
@@ -14,6 +20,8 @@
             <p><strong>Starring:</strong> {{ movie.Actors?.join(', ') }}</p>
             <p>{{ movie.Description }}</p>
          </mat-card-content>
+
+         <!-- Actions -->
          <mat-card-actions>
             <button mat-raised-button color="primary" (click)="goBack()" aria-label="Go back to previous page">Back</button>
             <button mat-icon-button color="warn" matTooltip="Add to Favorites" (click)="addToFavorites(movie)" [attr.aria-label]="'Add ' + movie.Title + ' to Favorites'">

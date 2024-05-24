@@ -19,6 +19,8 @@ const routes: Routes = [
 @NgModule({
    imports: [RouterModule.forRoot(routes)],
    exports: [RouterModule],
-   providers: [{ provide: APP_BASE_HREF, useValue: '/myFlix-Angular-client/' }]  // this is to fix the issue of the app not loading on github pages
+   providers: [{ provide: APP_BASE_HREF, useValue: '/myFlix-Angular-client/' }]  
+   // this is to fix the issue of the app not loading on github pages, 
+   // important to set the base href to prevent headaches
 })
 export class AppRoutingModule { }

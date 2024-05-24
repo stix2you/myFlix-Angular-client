@@ -1,4 +1,4 @@
-// This file is the entry point for the application
+// This file is the switchbox of the application
 // It tells Angular how to assemble the application
 // It imports browser modules, Angular modules, and modules from the Angular Material library
 // It also imports the components that belong to this module and declares them in the @NgModule decorator

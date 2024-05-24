@@ -1,3 +1,4 @@
+<!-- Render User Login Form-->
 <mat-card class="user-card">
    <mat-card-header>
       <mat-card-title>Log In!</mat-card-title>
@@ -5,17 +6,28 @@
    <mat-card-content>
       <form #loginForm="ngForm" aria-labelledby="login-form-title">
          <mat-form-field class="full-width">
-            <input matInput [(ngModel)]="userData.username" placeholder="Username" type="text" name="username" required
-               aria-required="true" aria-label="Username">
+            <input matInput [(ngModel)]="userData.username" 
+               placeholder="Username" 
+               type="text" 
+               name="username" 
+               required aria-required="true" 
+               aria-label="Username">
          </mat-form-field>
          <mat-form-field class="full-width">
-            <input matInput [(ngModel)]="userData.password" type="password" placeholder="Password" name="password"
-               required aria-required="true" aria-label="Password">
+            <input matInput [(ngModel)]="userData.password" 
+               type="password" 
+               placeholder="Password" 
+               name="password"
+               required aria-required="true" 
+               aria-label="Password">
          </mat-form-field>
       </form>
    </mat-card-content>
    <mat-card-actions>
-      <button mat-raised-button (click)="loginUser()" color="primary" class="action-button" aria-label="Login">
+      <button mat-raised-button (click)="loginUser()" 
+         color="primary" 
+         class="action-button" 
+         aria-label="Login">
          Login
       </button>
    </mat-card-actions>

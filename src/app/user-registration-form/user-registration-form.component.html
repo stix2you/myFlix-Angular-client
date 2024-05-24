@@ -1,3 +1,4 @@
+<!-- Render User Registration Card -->
 <mat-card class="user-card">
    <mat-card-header>
       <mat-card-title>Sign Up!</mat-card-title>
@@ -5,8 +6,17 @@
    <mat-card-content>
       <form #registrationForm="ngForm" aria-labelledby="sign-up-form-title">
          <mat-form-field class="full-width">
-            <input matInput [(ngModel)]="userData.username" placeholder="Username" type="text" name="username" required
-               minlength="8" aria-required="true" aria-label="Username" />
+            <input matInput [(ngModel)]="userData.username" 
+               placeholder="Username" 
+               type="text" 
+               name="username" 
+               required 
+               minlength="8" 
+               aria-required="true" 
+               aria-label="Username" 
+            />
+
+            <!-- Form Validation -->
             <mat-error
                *ngIf="registrationForm.controls['username']?.invalid && registrationForm.controls['username']?.touched">
                Username must be at least 8 characters long
@@ -38,6 +48,8 @@
          </mat-form-field>
       </form>
    </mat-card-content>
+
+   <!-- Actions (buttons) -->
    <mat-card-actions>
       <button mat-raised-button (click)="registerUser()" color="primary" [disabled]="registrationForm.invalid"
          class="action-button" aria-label="Sign Up">

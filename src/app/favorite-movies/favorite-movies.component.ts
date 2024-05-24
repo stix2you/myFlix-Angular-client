@@ -23,12 +23,12 @@ export class FavoriteMoviesComponent implements OnInit {
       private router: Router
    ) { }
 
-   // This method will fetch the favorite movies when the Angular is done creating the component
+   // fetch the favorite movies when the Angular is done creating the component
    ngOnInit(): void {
       this.getFavoriteMovies();
    }
 
-   // This method will determine the font size of the movie titles based on their length
+   // determine the font size of the movie titles based on their length
    getFontClass(title: string): string {
       const textLength = title.length;
       let fontClass: string;
@@ -44,7 +44,7 @@ export class FavoriteMoviesComponent implements OnInit {
       return fontClass;
    }
 
-   // This method will fetch the favorite movies from the API using the FetchApiDataService
+   // fetch the favorite movies from the API using the FetchApiDataService
    getFavoriteMovies(): void {
       const username = localStorage.getItem('username');
       if (username) {
@@ -66,6 +66,7 @@ export class FavoriteMoviesComponent implements OnInit {
       }
    }
 
+   // apply filters to the list of favorite movies
    applyFilters(): void {
       let movies = [...this.favorites];
 
@@ -89,31 +90,32 @@ export class FavoriteMoviesComponent implements OnInit {
       this.filteredMovies = movies.slice(0, this.limit);
    }
 
+   // Event handlers to trigger filters 
    onSearch(term: string): void {
       this.searchTerm = term;
       this.applyFilters();
    }
-
    onSort(order: string): void {
       this.sortOrder = order;
       this.applyFilters();
    }
-
    onLimitChange(limit: number): void {
       this.limit = limit;
       this.applyFilters();
    }
 
+   // Navigate to the movie details view
    viewDetails(movieId: string): void {
       this.router.navigate(['movie', movieId]);
    }
 
+   // Remove a movie from the user's list of favorite movies
    removeFromFavorites(movie: any): void {
       this.fetchApiData.removeFavoriteMovie(movie.Title).subscribe((response) => {
          this.snackBar.open(`${movie.Title} has been removed from your favorites!`, 'OK', {
             duration: 2000
          });
-         this.getFavoriteMovies(); // Refresh favorites after removing one
+         this.getFavoriteMovies(); // Refresh favorites after removing one!!
       }, (error) => {
          console.error('Error removing movie from favorites:', error);
          this.snackBar.open('Failed to remove from favorites', 'OK', {

@@ -6,7 +6,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
    templateUrl: './genre-info.component.html',
    styleUrls: ['./genre-info.component.scss']
 })
+
 export class GenreInfoComponent {
-   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }  // Inject data into the dialog, any data passed to the dialog is stored in the data property
+   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }  
+   // Inject data into the dialog, any data passed to the dialog is stored in the data property
+   // This is to display the genre information in the dialog modal
 }
 

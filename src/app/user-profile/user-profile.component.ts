@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // This component provides the user profile view
 // It allows users to view and edit their profile information
@@ -18,7 +19,8 @@ export class UserProfileComponent implements OnInit {
    constructor(
       private fetchApiData: FetchApiDataService,
       private fb: FormBuilder,
-      private router: Router
+      private router: Router,
+      public snackBar: MatSnackBar,
    ) {
       this.profileForm = this.fb.group({   // Define the form group
          username: [''],
@@ -47,9 +49,15 @@ export class UserProfileComponent implements OnInit {
             });
          }, error => {
             console.error('API call error:', error); // Debug log for API error
+            this.snackBar.open('Error Fetching Profile! Please Login Again!', 'OK', {
+               duration: 2000
+            });
          });
       } else {
          console.error('Username not found'); // Debug log for missing username
+         this.snackBar.open('User Not Found! Please Login Again!', 'OK', {
+            duration: 2000
+         });
       }
    }
 
@@ -68,13 +76,19 @@ export class UserProfileComponent implements OnInit {
             this.toggleEditMode();
          }, error => {
             console.error('Error updating user profile:', error); // Debug log for update error
+            this.snackBar.open('Error Updating Profile! Contact Admin!', 'OK', {
+               duration: 2000
+            });
          });
       } else {
          console.error('Username not found for update'); // Debug log for missing username
+         this.snackBar.open('Error Updating Profile! Contact Admin!', 'OK', {
+            duration: 2000
+         });
       }
    }
 
-   // This method will delete the user account
+   // delete the user account
    onDelete(): void {
       const username = localStorage.getItem('username');
       if (username) {
@@ -86,6 +100,9 @@ export class UserProfileComponent implements OnInit {
          }
       } else {
          console.error('Error deleting account');
+         this.snackBar.open('Error Deleting User Account! Contact Admin!', 'OK', {
+            duration: 2000
+         });
       }
    }
 }

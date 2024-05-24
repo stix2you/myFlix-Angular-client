@@ -11,10 +11,12 @@ export class NavBarComponent {
 
    constructor(private router: Router) { }
 
+   // only show navbar if user is logged in, function called in the HTML
    isLoggedIn(): boolean {
       return !!localStorage.getItem('token');
    }
 
+   // cleanup after logout, navigate to welcome page
    logout(): void {
       localStorage.removeItem('token');
       localStorage.removeItem('username');

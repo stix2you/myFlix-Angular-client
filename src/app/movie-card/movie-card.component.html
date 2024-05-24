@@ -1,9 +1,17 @@
 <div class="main-content">
+   <!-- Render the search/filter bar -->
    <app-search-filter aria-label="Search and Filter Movies" (search)="onSearch($event)" (sort)="onSort($event)"
       (limitChange)="onLimitChange($event)"></app-search-filter>
 
+   <!-- Render the movie list -->
    <div class="movie-list-container" role="region" aria-label="Movie List">
       <div class="movie-list">
+         <!-- Render each movie as a card. Three sections: Movie Title, Image, and Actions (buttons)
+            Each card contains the movie title, image, and two buttons: one to add 
+            the movie to favorites and another to view the movie details. 
+            
+            *** Note the variable sizing of the titles.  The movie title is styled (sized) based on the font 
+            class returned by the getFontClass method, which determines the font size based on the length of the title. -->
          <mat-card *ngFor="let movie of filteredMovies; let i=index" class="movie-card" tabindex="0" role="article"
             aria-label="Movie Card">
             <mat-card-header class="movie-card-header">

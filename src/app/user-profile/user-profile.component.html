@@ -1,3 +1,4 @@
+<!-- Render the User Profile Card -->
 <div class="profile-container">
    <mat-card class="profile-card">
       <mat-card-title>User Profile</mat-card-title>
@@ -11,9 +12,14 @@
                Update Information
             </button>
          </div>
+
+         <!-- Form appears in Edit Mode -->
          <ng-template #editForm>
-            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" aria-live="polite"
-               aria-labelledby="edit-profile-form">
+            <form [formGroup]="profileForm" 
+               (ngSubmit)="onSubmit()" 
+               aria-live="polite"
+               aria-labelledby="edit-profile-form"
+            >
                <mat-form-field>
                   <mat-label>Username</mat-label>
                   <input matInput formControlName="username" aria-required="true" aria-label="Edit Username" />
@@ -32,12 +38,15 @@
                   <input matInput formControlName="password" type="password" aria-label="Edit Password" />
                   <mat-hint>Leave blank if no changes</mat-hint>
                </mat-form-field>
+
+               <!-- Actions -->
                <button mat-raised-button class="profile-button" color="primary" type="submit"
                   aria-label="Submit Changes">Submit Changes</button>
                <button mat-raised-button class="profile-button" color="warn" type="button" (click)="onDelete()"
                   aria-label="Delete Account">Delete Account</button>
                <button mat-raised-button class="profile-button" type="button" (click)="toggleEditMode()"
                   aria-label="Cancel Edit">Back</button>
+
             </form>
          </ng-template>
       </mat-card-content>

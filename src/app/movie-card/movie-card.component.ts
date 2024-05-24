@@ -38,7 +38,7 @@ export class MovieCardComponent implements OnInit {
    getFontClass(title: string): string {
       const textLength = title.length;
       let fontClass: string;
-
+      // Title font size adjustment for large titles: adjust font size breakpoints as needed below
       if (textLength > 50) {
          fontClass = 'small-font';
       } else if (textLength > 20) {
@@ -46,7 +46,6 @@ export class MovieCardComponent implements OnInit {
       } else {
          fontClass = 'large-font';
       }
-
       return fontClass;
    }
 
@@ -59,6 +58,7 @@ export class MovieCardComponent implements OnInit {
       });
    }
 
+   // This method will apply the filters to the movies list, for the search/filter, sort, and limit functionality
    applyFilters(): void {
       let movies = this.movies;
 

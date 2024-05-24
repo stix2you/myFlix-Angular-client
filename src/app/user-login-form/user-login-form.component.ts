@@ -23,7 +23,7 @@ export class UserLoginFormComponent implements OnInit {
    ngOnInit(): void {
    }
 
-   // This is the function responsible for sending the form inputs to the backend
+   // This is the function responsible for saving info to local storage and navigating to the movies view
    loginUser(): void {
       this.fetchApiData.userLogin(this.userData).subscribe(
          (result) => {
@@ -34,7 +34,6 @@ export class UserLoginFormComponent implements OnInit {
             this.dialogRef.close(); // This will close the modal on success!
 
             this.router.navigate(['movies']);
-
             this.snackBar.open('Login successful!', 'OK', {
                duration: 2000
             });
