@@ -3,6 +3,7 @@ WELCOME TO MYFLIX ANGULAR
 *************************
 
 
+
 --------------------
 Project Description:
 --------------------
@@ -10,15 +11,15 @@ Project Description:
 MyFlix Angular is a Movie Catalog App to catalog Movies and store data on the Movies, Directors, Actors, Genres, and the Users who wish to view the data.  It was built using Angular and is connected to a backend database.  It also uses Angular Material for styling. 
 
 
-Project Dependencies: 
-This project uses an API built by myself, hosted here:
+This project uses an API built by Doug Hill (stix2you@gmail.com), hosted here:
 https://stix2you-myflix-5cbcd3c20372.herokuapp.com/
 
-Further information and documentation related to this API can be found here:
+Further information and documentation related to this API and database can be found here:
 https://github.com/stix2you/myFlix_api
 
 Git Repo for this client-side Angular project here:
 https://github.com/stix2you/myFlix-Angular-client
+
 
 
 
@@ -56,6 +57,29 @@ PROJECT SETUP FOR DEV ENVIRONMENT:
 - To start Dev server for mobile devices, enter:
 
    npm start   (this runs a script to launch a dev server on port 8080, which is accepted by the CORS of the database)
+
+
+
+---------------------------
+BUILD and DEPLOY TO GHPAGES
+---------------------------
+
+1. Create a new repository on GitHub.
+
+2. Link the new remote repository to the local project folder. To do so, simply run this command from inside your project folder (replace <GitHub-username> and <repository-name> with your own GitHub username and repository name): git remote add origin https://github.com/<GitHub-username>/<repository-name>.git
+
+3. Add angular-cli-ghpages by running ng add angular-cli-ghpages.
+
+4. Build your application. To do so, run the following command, replacing <repository-name> with your own repository name: 
+
+   ng deploy --base-href=/<repository-name>/
+
+5. Wait for angular-cli-ghpages to generate the new production code. It will then try to push the code to the gh-pages branch, so it will prompt you to enter your GitHub username and password if you haven't automated the GitHub authentication process before.
+
+6. The application should be published shortly. The URL of your application will be:
+
+   https://<GitHub-username>.github.io/<repository-name>/
+
 
 
 -------------
@@ -106,9 +130,10 @@ Dependencies can be viewed in the package.json file, this is a copy of that file
 }
 
 
-********************
-ANGULAR INFORMATION:
-********************
+
+*****************************
+ANGULAR SPECIFIC INFORMATION:
+*****************************
 
 # MyFlixAngularClient
 
