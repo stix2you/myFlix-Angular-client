@@ -9,7 +9,7 @@
 
    <!-- Three forms w/in container: Search, Sort, and Limit (Number of Listings) -->
    <div class="filter-forms" [ngClass]="{'show': !isScreenSmall || showFilters}" id="filter-forms">
-      
+
       <!-- Search -->
       <form (ngSubmit)="onSearch()" class="filter-form" aria-labelledby="search-form-label">
          <mat-form-field class="filter-form-field">
@@ -30,8 +30,6 @@
                aria-label="Sort movies by title or year">
                <mat-option value="title-asc">Title Ascending</mat-option>
                <mat-option value="title-desc">Title Descending</mat-option>
-               <mat-option value="year-asc">Year Ascending</mat-option>
-               <mat-option value="year-desc">Year Descending</mat-option>
             </mat-select>
          </mat-form-field>
          <button class="filter-form-button" mat-raised-button color="primary" type="submit" aria-label="Submit sorting">
