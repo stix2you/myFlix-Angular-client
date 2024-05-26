@@ -1,0 +1,99 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>my-flix-angular-client - v0.0.0</title><meta name="description" content="Documentation for my-flix-angular-client"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">my-flix-angular-client - v0.0.0</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>my-flix-angular-client - v0.0.0</h2></div><div class="tsd-panel tsd-typography"><hr>
+<p>WELCOME TO MYFLIX ANGULAR</p>
+<hr>
+<hr>
+<a id="md:project-description" class="tsd-anchor"></a><h2><a href="#md:project-description">Project Description:</a></h2><p>MyFlix Angular is a Movie Catalog App to catalog Movies and store data on the Movies, Directors, Actors, Genres, and the Users who wish to view the data.  It was built using Angular and is connected to a backend database.  It also uses Angular Material for styling. </p>
+<p>This project uses an API built by Doug Hill (<a href="mailto:stix2you@gmail.com">stix2you@gmail.com</a>), hosted here:
+<a href="https://stix2you-myflix-5cbcd3c20372.herokuapp.com/">https://stix2you-myflix-5cbcd3c20372.herokuapp.com/</a></p>
+<p>Further information and documentation related to this API and database can be found here:
+<a href="https://github.com/stix2you/myFlix_api">https://github.com/stix2you/myFlix_api</a></p>
+<p>Git Repo for this client-side Angular project here:
+<a href="https://github.com/stix2you/myFlix-Angular-client">https://github.com/stix2you/myFlix-Angular-client</a></p>
+<hr>
+<a id="md:project-setup-for-dev-environment" class="tsd-anchor"></a><h2><a href="#md:project-setup-for-dev-environment">PROJECT SETUP FOR DEV ENVIRONMENT:</a></h2><ul>
+<li><p>Download repo from above URL and install in a directory.</p>
+</li>
+<li><p>In terminal windown within that directory:</p>
+</li>
+<li><p>Set up Node to lateset stable version</p>
+<p> nvm install 16.19.0 (or whatever is latest stable version)
+ nvm use 16.19.0</p>
+</li>
+<li><p>Install Angular <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 17.3.6</p>
+<p> npm install -g @angular/cli</p>
+</li>
+<li><p>Install Angular Material [documentation here: <a href="https://material.angular.io/]">https://material.angular.io/]</a></p>
+<p> ng add @angular/material</p>
+</li>
+<li><p>Navigate to directory you want to place the project in</p>
+</li>
+<li><p>Clone this repository <a href="https://github.com/stix2you/myFlix-Angular-client">https://github.com/stix2you/myFlix-Angular-client</a></p>
+<p> git clone <a href="https://github.com/stix2you/myFlix-Angular-client">https://github.com/stix2you/myFlix-Angular-client</a></p>
+</li>
+<li><p>Install project dependencies (see full list below):</p>
+<p> npm install </p>
+</li>
+<li><p>To start Dev server for mobile devices, enter:</p>
+<p> npm start   (this runs a script to launch a dev server on port 8080, which is accepted by the CORS of the database)</p>
+</li>
+</ul>
+<hr>
+<a id="md:build-and-deploy-to-gh-pages" class="tsd-anchor"></a><h2><a href="#md:build-and-deploy-to-gh-pages">BUILD and DEPLOY TO GH-PAGES</a></h2><p>Add angular-cli-ghpages:  ng add angular-cli-ghpages.</p>
+<p>Build command:  ng deploy --base-href=/myFlix-Angular-client/</p>
+<hr>
+<a id="md:dependencies" class="tsd-anchor"></a><h2><a href="#md:dependencies">DEPENDENCIES:</a></h2><p>Dependencies can be viewed in the package.json file, this is a copy of that file as of the writing of this document:</p>
+<p>{
+  &quot;name&quot;: &quot;my-flix-angular-client&quot;,
+  &quot;version&quot;: &quot;0.0.0&quot;,
+  &quot;scripts&quot;: {
+    &quot;ng&quot;: &quot;ng&quot;,
+    &quot;start&quot;: &quot;ng serve --port 8080&quot;,
+    &quot;build&quot;: &quot;ng build&quot;,
+    &quot;watch&quot;: &quot;ng build --watch --configuration development&quot;,
+    &quot;test&quot;: &quot;ng test&quot;
+  },
+  &quot;private&quot;: true,
+  &quot;dependencies&quot;: {
+    &quot;@angular/animations&quot;: &quot;^17.3.0&quot;,
+    &quot;@angular/cdk&quot;: &quot;^17.3.8&quot;,
+    &quot;@angular/common&quot;: &quot;^17.3.0&quot;,
+    &quot;@angular/compiler&quot;: &quot;^17.3.0&quot;,
+    &quot;@angular/core&quot;: &quot;^17.3.0&quot;,
+    &quot;@angular/forms&quot;: &quot;^17.3.0&quot;,
+    &quot;@angular/material&quot;: &quot;^17.3.8&quot;,
+    &quot;@angular/platform-browser&quot;: &quot;^17.3.0&quot;,
+    &quot;@angular/platform-browser-dynamic&quot;: &quot;^17.3.0&quot;,
+    &quot;@angular/router&quot;: &quot;^17.3.0&quot;,
+    &quot;rxjs&quot;: &quot;<del>7.8.0&quot;,
+    &quot;tslib&quot;: &quot;^2.3.0&quot;,
+    &quot;zone.js&quot;: &quot;</del>0.14.3&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;@angular-devkit/build-angular&quot;: &quot;^17.3.6&quot;,
+    &quot;@angular/cli&quot;: &quot;^17.3.6&quot;,
+    &quot;@angular/compiler-cli&quot;: &quot;^17.3.0&quot;,
+    &quot;@types/jasmine&quot;: &quot;<del>5.1.0&quot;,
+    &quot;jasmine-core&quot;: &quot;</del>5.1.0&quot;,
+    &quot;karma&quot;: &quot;<del>6.4.0&quot;,
+    &quot;karma-chrome-launcher&quot;: &quot;</del>3.2.0&quot;,
+    &quot;karma-coverage&quot;: &quot;<del>2.2.0&quot;,
+    &quot;karma-jasmine&quot;: &quot;</del>5.1.0&quot;,
+    &quot;karma-jasmine-html-reporter&quot;: &quot;<del>2.1.0&quot;,
+    &quot;typescript&quot;: &quot;</del>5.4.2&quot;
+  }
+}</p>
+<hr>
+<p>ANGULAR SPECIFIC INFORMATION:</p>
+<hr>
+<a id="md:myflixangularclient" class="tsd-anchor"></a><h1><a href="#md:myflixangularclient">MyFlixAngularClient</a></h1><p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 17.3.6.</p>
+<p>To set up this project, install Angular globally on your machine:
+$ npm install -g @angular/cli</p>
+<p>Then clone this repository into a project directory, go to that directory, and install dependencies:
+$ npm install</p>
+<a id="md:development-server" class="tsd-anchor"></a><h2><a href="#md:development-server">Development server</a></h2><p>Run <code>npm start</code> which will run a script:  <code>ng serve --port 8080</code> for a dev server. Navigate to <code>http://localhost:8080/</code>. The application will automatically reload if you change any of the source files.</p>
+<a id="md:code-scaffolding" class="tsd-anchor"></a><h2><a href="#md:code-scaffolding">Code scaffolding</a></h2><p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
+<a id="md:build" class="tsd-anchor"></a><h2><a href="#md:build">Build</a></h2><p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
+<a id="md:running-unit-tests" class="tsd-anchor"></a><h2><a href="#md:running-unit-tests">Running unit tests</a></h2><p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
+<a id="md:running-end-to-end-tests" class="tsd-anchor"></a><h2><a href="#md:running-end-to-end-tests">Running end-to-end tests</a></h2><p>Run <code>ng e2e</code> to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.</p>
+<a id="md:further-help" class="tsd-anchor"></a><h2><a href="#md:further-help">Further help</a></h2><p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://angular.io/cli">Angular CLI Overview and Command Reference</a> page.</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-index-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><h4 class="uppercase">Member Visibility</h4><form><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></form></div><div class="tsd-theme-toggle"><h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><ul><li><a href="#md:project-description"><span>Project <wbr/>Description:</span></a></li><li><a href="#md:project-setup-for-dev-environment"><span>PROJECT SETUP FOR DEV ENVIRONMENT:</span></a></li><li><a href="#md:build-and-deploy-to-gh-pages"><span>BUILD and DEPLOY TO GH-<wbr/>PAGES</span></a></li><li><a href="#md:dependencies"><span>DEPENDENCIES:</span></a></li></ul><a href="#md:myflixangularclient"><span>My<wbr/>Flix<wbr/>Angular<wbr/>Client</span></a><ul><li><a href="#md:development-server"><span>Development server</span></a></li><li><a href="#md:code-scaffolding"><span>Code scaffolding</span></a></li><li><a href="#md:build"><span>Build</span></a></li><li><a href="#md:running-unit-tests"><span>Running unit tests</span></a></li><li><a href="#md:running-end-to-end-tests"><span>Running end-<wbr/>to-<wbr/>end tests</span></a></li><li><a href="#md:further-help"><span>Further help</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>my-flix-angular-client - v0.0.0</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

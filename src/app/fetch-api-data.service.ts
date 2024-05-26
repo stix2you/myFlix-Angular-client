@@ -97,7 +97,7 @@ export class FetchApiDataService {
 
    /**
    * @description This method retrieves data about a genre by its name
-   * @param {string} name - The name of the genre to retrieve
+   * @param {string} genre - The name of the genre to retrieve
    * @returns {Observable<any>} An observable containing the genre object
    */
    public getGenreInfo(genre: string): Observable<any> {

@@ -1,0 +1,23 @@
+{
+   "entryPoints": [
+      "src/app",
+      "src/app/director-info",
+      "src/app/favorite-movies",
+      "src/app/genre-info",
+      "src/app/movie-card",
+      "src/app/movie-detail",
+      "src/app/nav-bar",
+      "src/app/search-filter",
+      "src/app/user-login-form",
+      "src/app/user-profile",
+      "src/app/user-registration-form",
+      "src/app/welcome-page"
+   ],
+   "entryPointStrategy": "expand",
+   "out": "docs",
+   "includeVersion": true,
+   "exclude": ["**/*.spec.ts", "node_modules"],
+   "excludeExternals": true,
+   "excludePrivate": true,
+   "excludeProtected": true
+ }
