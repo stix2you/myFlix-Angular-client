@@ -20,9 +20,12 @@
          "src/app/user-registration-form",
          "src/app/welcome-page"
       ],
-      "includePattern": ".ts$",
+      "includePattern": ".+\\.ts$",
       "excludePattern": "(node_modules/|docs)"
    },
+   "plugins": [
+      "node_modules/jsdoc-better-typescript"
+   ],
    "opts": {
       "destination": "./docs",
       "recurse": true,
