@@ -12,8 +12,20 @@ import { GenreInfoComponent } from '../genre-info/genre-info.component';
    styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent implements OnInit {
+   
+   /**
+   * @description The movie object containing detailed information about the movie.
+   */
    movie: any = {};
 
+   /**
+   * @description Constructor for MovieDetailComponent.
+   * @param {ActivatedRoute} route - The route that contains the movie title parameter.
+   * @param {Router} router - The router service to navigate between views.
+   * @param {FetchApiDataService} fetchApiData - The service to fetch API data.
+   * @param {MatSnackBar} snackBar - The service to display snack bar messages.
+   * @param {MatDialog} dialog - The dialog service to open dialogs.
+   */
    constructor(
       private route: ActivatedRoute,
       private router: Router,
@@ -22,7 +34,9 @@ export class MovieDetailComponent implements OnInit {
       public dialog: MatDialog
    ) { }
 
-   // This method will run when the component is initialized, note the prototype error handling, similar for all functions
+   /**
+   * @description Angular lifecycle hook that gets called after the component's view has been fully initialized.
+   */
    ngOnInit(): void {
       const movieTitle = this.route.snapshot.paramMap.get('title');
       if (movieTitle) {
@@ -37,7 +51,10 @@ export class MovieDetailComponent implements OnInit {
       }
    }
 
-   // This function will fetch the movie details from the API w/ error handling
+   /**
+   * @description Fetches the details of a movie using the FetchApiDataService.
+   * @param {string} title - The title of the movie.
+   */
    getMovieDetails(title: string): void {
       this.fetchApiData.getOneMovie(title).subscribe((response: any) => {
          this.movie = response;
@@ -49,7 +66,10 @@ export class MovieDetailComponent implements OnInit {
       });
    }
    
-   // This function will add a movie to the user's list of favorite movies
+   /**
+   * @description Adds a movie to the user's list of favorite movies.
+   * @param {any} movie - The movie to add.
+   */
    addToFavorites(movie: any): void {
       this.fetchApiData.addFavoriteMovie(movie._id).subscribe((response) => {
          this.snackBar.open(`${movie.Title} has been added to your favorites!`, 'OK', {
@@ -63,7 +83,10 @@ export class MovieDetailComponent implements OnInit {
       });
    }
 
-   // This function will open the dialog window for the genre information w/ error handling
+   /**
+   * @description Opens a dialog to display information about a genre.
+   * @param {string} genre - The genre to display information about.
+   */
    viewGenre(genre: string): void {
       this.fetchApiData.getGenreInfo(genre).subscribe((response: any) => {  // Fetch genre info from the API
          this.dialog.open(GenreInfoComponent, {                            // Open the dialog component
@@ -78,7 +101,10 @@ export class MovieDetailComponent implements OnInit {
       });
    }
 
-   // This function will open the dialog window for the director information w/ error handling
+   /**
+   * @description Opens a dialog to display information about a director.
+   * @param {string} director - The director to display information about.
+   */
    viewDirector(director: string): void {
       this.fetchApiData.getDirectorInfo(director).subscribe((response: any) => {
          this.dialog.open(DirectorInfoComponent, {
@@ -93,7 +119,9 @@ export class MovieDetailComponent implements OnInit {
       });
    }
 
-   // This function will navigate back to the movies view, parachute function
+   /**
+   * @description Navigates back to the movies view.
+   */
    goBack(): void {
       this.router.navigate(['movies']);
    }

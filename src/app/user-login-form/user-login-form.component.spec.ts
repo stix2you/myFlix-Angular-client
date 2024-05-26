@@ -2,6 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserLoginFormComponent } from './user-login-form.component';
 
+/**
+ * @file user-login-form.component.spec.ts
+ * @description Unit tests for UserLoginFormComponent.
+ */
 describe('UserLoginFormComponent', () => {
   let component: UserLoginFormComponent;
   let fixture: ComponentFixture<UserLoginFormComponent>;

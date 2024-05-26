@@ -1,13 +1,6 @@
-// This file is the switchbox of the application
-// It tells Angular how to assemble the application
-// It imports browser modules, Angular modules, and modules from the Angular Material library
-// It also imports the components that belong to this module and declares them in the @NgModule decorator
-// The decorator also imports the services that this module contributes to the global collection of services
-// and specifies the main application view, called the root component, that hosts all other app views.
-
 /**
  * @module AppModule
- * @description The root module of the application.
+ * @description The root module of the application that tells Angular how to assemble the application
  */
 
 // Core imports

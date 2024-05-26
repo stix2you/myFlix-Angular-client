@@ -2,6 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchFilterComponent } from './search-filter.component';
 
+/**
+ * @file search-filter.component.spec.ts
+ * @description Unit tests for SearchFilterComponent.
+ */
 describe('SearchFilterComponent', () => {
   let component: SearchFilterComponent;
   let fixture: ComponentFixture<SearchFilterComponent>;

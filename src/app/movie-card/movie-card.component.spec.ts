@@ -1,5 +1,8 @@
+/**
+ * @file movie-card.component.spec.ts
+ * @description Unit tests for MovieCardComponent.
+ */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MovieCardComponent } from './movie-card.component';
 
 describe('MovieCardComponent', () => {

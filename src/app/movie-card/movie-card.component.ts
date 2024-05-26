@@ -1,3 +1,7 @@
+/**
+ * @component MovieCardComponent
+ * @description Component to display and manage a list of movies. The list is sortable and filterable.
+ */
 import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,19 +26,30 @@ export class MovieCardComponent implements OnInit {
    @Input() title: string = '';  // @Input decorator means the parent component can pass data to it
    fontClass: string = '';
 
-   // constructor for the component that will call the necessary functions for the component to work
+   /**
+   * @description Constructor for MovieCardComponent.
+   * @param {FetchApiDataService} fetchApiData - The service to fetch API data.
+   * @param {MatSnackBar} snackBar - The service to display snack bar messages.
+   * @param {Router} router - The router service to navigate between views.
+   */
    constructor(
       public fetchApiData: FetchApiDataService,
       public snackBar: MatSnackBar,
       private router: Router
    ) { }
 
-   // This method will fetch the movies when the Angular is done creating the component
+   /**
+   * @description Angular lifecycle hook that gets called after the component's view has been fully initialized.
+   */
    ngOnInit(): void {
       this.getMovies();
    }
 
-   // This method will determine the font size of the movie titles based on their length
+   /**
+    * @description Returns the appropriate font class based on the title length.
+    * @param {string} title - The title of the movie.
+    * @returns {string} - The font class to use.
+    */
    getFontClass(title: string): string {
       const textLength = title.length;
       let fontClass: string;
@@ -49,7 +64,9 @@ export class MovieCardComponent implements OnInit {
       return fontClass;
    }
 
-   // This method will fetch the movies from the API using the FetchApiDataService
+   /**
+   * @description Fetches the movies from the API using the FetchApiDataService.
+   */
    getMovies(): void {
       this.fetchApiData.getAllMovies().subscribe((resp: any) => {
          this.movies = resp;
@@ -58,7 +75,9 @@ export class MovieCardComponent implements OnInit {
       });
    }
 
-   // This method will apply the filters to the movies list, for the search/filter, sort, and limit functionality
+   /**
+   * @description Applies filters to the movies list based on the search term, sort order, and limit.
+   */
    applyFilters(): void {
       let movies = this.movies;
 
@@ -82,26 +101,45 @@ export class MovieCardComponent implements OnInit {
       this.filteredMovies = movies.slice(0, this.limit);
    }
 
+   /**
+   * @description Handles search term input and triggers filtering.
+   * @param {string} term - The search term.
+   */
    onSearch(term: string): void {
       this.searchTerm = term;
       this.applyFilters();
    }
 
+   /**
+   * @description Handles sort order change and triggers sorting.
+   * @param {string} order - The sort order.
+   */
    onSort(order: string): void {
       this.sortOrder = order;
       this.applyFilters();
    }
 
+   /**
+   * @description Handles limit change and triggers filtering.
+   * @param {number} limit - The number of movies to display.
+   */
    onLimitChange(limit: number): void {
       this.limit = limit;
       this.applyFilters();
    }
 
+   /**
+   * @description Navigates to the movie details view.
+   * @param {string} movieId - The ID of the movie.
+   */
    viewDetails(movieId: string): void {
       this.router.navigate(['movie', movieId]);
    }
 
-
+   /**
+   * @description Adds a movie to the user's list of favorite movies.
+   * @param {any} movie - The movie to add.
+   */
    addToFavorites(movie: any): void {
       this.fetchApiData.addFavoriteMovie(movie.Title).subscribe((response) => {
          this.snackBar.open(`${movie.Title} has been added to your favorites!`, 'OK', {

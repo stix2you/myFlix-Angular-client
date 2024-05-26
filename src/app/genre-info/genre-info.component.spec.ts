@@ -1,5 +1,8 @@
+/**
+ * @file genre-info.component.spec.ts
+ * @description Unit tests for GenreInfoComponent.
+ */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GenreInfoComponent } from './genre-info.component';
 
 describe('GenreInfoComponent', () => {

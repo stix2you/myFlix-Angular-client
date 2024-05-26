@@ -1,5 +1,8 @@
+/**
+ * @file favorite-movies.component.spec.ts
+ * @description Unit tests for FavoriteMoviesComponent.
+ */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FavoriteMoviesComponent } from './favorite-movies.component';
 
 describe('FavoriteMoviesComponent', () => {

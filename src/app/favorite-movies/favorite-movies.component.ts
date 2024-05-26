@@ -1,3 +1,7 @@
+/**
+ * @component FavoriteMoviesComponent
+ * @description Component to display and manage the user's favorite movies.
+ */
 import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,18 +21,30 @@ export class FavoriteMoviesComponent implements OnInit {
    @Input() title: string = '';  // @Input decorator means the parent component can pass data to it
    fontClass: string = '';
 
+   /**
+   * @description Constructor for FavoriteMoviesComponent.
+   * @param {FetchApiDataService} fetchApiData - The service to fetch API data.
+   * @param {MatSnackBar} snackBar - The service to display snack bar messages.
+   * @param {Router} router - The router service to navigate between views.
+   */
    constructor(
       private fetchApiData: FetchApiDataService,
       public snackBar: MatSnackBar,
       private router: Router
    ) { }
 
-   // fetch the favorite movies when the Angular is done creating the component
+   /**
+   * @description Angular lifecycle hook that gets called after the component's view has been fully initialized.
+   */
    ngOnInit(): void {
       this.getFavoriteMovies();
    }
 
-   // determine the font size of the movie titles based on their length
+   /**
+   * @description Determines the font size of the movie titles based on their length.
+   * @param {string} title - The title of the movie.
+   * @returns {string} The CSS class for the font size.
+   */
    getFontClass(title: string): string {
       const textLength = title.length;
       let fontClass: string;
@@ -44,7 +60,9 @@ export class FavoriteMoviesComponent implements OnInit {
       return fontClass;
    }
 
-   // fetch the favorite movies from the API using the FetchApiDataService
+   /**
+   * @description Fetches the user's favorite movies from the API.
+   */
    getFavoriteMovies(): void {
       const username = localStorage.getItem('username');
       if (username) {
@@ -66,15 +84,15 @@ export class FavoriteMoviesComponent implements OnInit {
       }
    }
 
-   // apply filters to the list of favorite movies
+   /**
+   * @description Applies filters to the list of favorite movies.
+   */
    applyFilters(): void {
       let movies = [...this.favorites];
-
       // Filter by search term
       if (this.searchTerm) {
          movies = movies.filter(movie => movie.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
       }
-
       // Sort movies
       if (this.sortOrder === 'title-asc') {
          movies.sort((a, b) => a.Title.localeCompare(b.Title));
@@ -85,31 +103,49 @@ export class FavoriteMoviesComponent implements OnInit {
       } else if (this.sortOrder === 'year-desc') {
          movies.sort((a, b) => b.ReleaseYear - a.ReleaseYear);
       }
-
       // Limit movies
       this.filteredMovies = movies.slice(0, this.limit);
    }
 
-   // Event handlers to trigger filters 
+   /**
+   * @description Handles search term input and triggers filtering.
+   * @param {string} term - The search term.
+   */ 
    onSearch(term: string): void {
       this.searchTerm = term;
       this.applyFilters();
    }
+
+   /**
+   * @description Handles sort order change and triggers sorting.
+   * @param {string} order - The sort order.
+   */
    onSort(order: string): void {
       this.sortOrder = order;
       this.applyFilters();
    }
+
+   /**
+   * @description Handles limit change and triggers filtering.
+   * @param {number} limit - The number of movies to display.
+   */
    onLimitChange(limit: number): void {
       this.limit = limit;
       this.applyFilters();
    }
 
-   // Navigate to the movie details view
+   /**
+   * @description Navigates to the movie details view.
+   * @param {string} movieId - The ID of the movie.
+   */
    viewDetails(movieId: string): void {
       this.router.navigate(['movie', movieId]);
    }
 
-   // Remove a movie from the user's list of favorite movies
+   /**
+   * @description Removes a movie from the user's list of favorite movies.
+   * @param {any} movie - The movie to remove.
+   */
    removeFromFavorites(movie: any): void {
       this.fetchApiData.removeFavoriteMovie(movie.Title).subscribe((response) => {
          this.snackBar.open(`${movie.Title} has been removed from your favorites!`, 'OK', {

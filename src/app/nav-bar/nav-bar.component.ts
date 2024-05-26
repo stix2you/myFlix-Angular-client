@@ -1,3 +1,7 @@
+/**
+ * @component NavBarComponent
+ * @description Component for the navigation bar of the application.
+ */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,16 +11,29 @@ import { Router } from '@angular/router';
    styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
+   
+   /**
+   * @description The search term entered by the user.
+   */
    searchTerm: string = '';
 
+   /**
+   * @description Constructor for NavBarComponent.
+   * @param {Router} router - The router service to navigate between views.
+   */
    constructor(private router: Router) { }
 
-   // only show navbar if user is logged in, function called in the HTML
+   /**
+   * @description Checks if the user is logged in.
+   * @returns {boolean} True if the user is logged in, false otherwise.
+   */
    isLoggedIn(): boolean {
       return !!localStorage.getItem('token');
    }
 
-   // cleanup after logout, navigate to welcome page
+   /**
+   * @description Logs the user out, clears local storage, and navigates to the welcome page.
+   */
    logout(): void {
       localStorage.removeItem('token');
       localStorage.removeItem('username');

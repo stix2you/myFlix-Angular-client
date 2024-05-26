@@ -1,5 +1,8 @@
+/**
+ * @file director-info.component.spec.ts
+ * @description Unit tests for DirectorInfoComponent.
+ */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DirectorInfoComponent } from './director-info.component';
 
 describe('DirectorInfoComponent', () => {

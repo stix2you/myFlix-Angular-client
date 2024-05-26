@@ -1,3 +1,7 @@
+/**
+ * @component UserProfileComponent
+ * @description Component to display and edit user profile information.
+ */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -16,6 +20,13 @@ export class UserProfileComponent implements OnInit {
    editMode: boolean = false;
    profileForm: FormGroup;
 
+   /**
+   * @description Constructor for UserProfileComponent.
+   * @param {FetchApiDataService} fetchApiData - The service to fetch API data.
+   * @param {FormBuilder} fb - The form builder service.
+   * @param {Router} router - The router service to navigate between views.
+   * @param {MatSnackBar} snackBar - The service to display snack bar messages.
+   */
    constructor(
       private fetchApiData: FetchApiDataService,
       private fb: FormBuilder,
@@ -30,12 +41,16 @@ export class UserProfileComponent implements OnInit {
       });
    }
 
-   // This method will run when the component is initialized, fetching the user profile from the backend 
+   /**
+   * @description Angular lifecycle hook that gets called after the component's view has been fully initialized.
+   */
    ngOnInit(): void {
       this.getUserProfile();
    }
 
-   // This method will fetch the user profile from the backend
+   /**
+   * @description Fetches the user profile from the backend.
+   */
    getUserProfile(): void {
       const username = localStorage.getItem('username');  // Get username from localStorage
 
@@ -61,12 +76,16 @@ export class UserProfileComponent implements OnInit {
       }
    }
 
-   // This method will toggle the edit mode for the profile form
+   /**
+   * @description Toggles the edit mode for the profile form.
+   */
    toggleEditMode(): void {
       this.editMode = !this.editMode;
    }
 
-   // This method will submit the updated profile form
+   /**
+   * @description Submits the updated profile form.
+   */
    onSubmit(): void {
       const username = localStorage.getItem('username');
 
@@ -88,7 +107,9 @@ export class UserProfileComponent implements OnInit {
       }
    }
 
-   // delete the user account
+   /**
+   * @description Deletes the user account.
+   */
    onDelete(): void {
       const username = localStorage.getItem('username');
       if (username) {
