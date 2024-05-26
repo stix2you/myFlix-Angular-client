@@ -1,3 +1,7 @@
+/**
+ * @module AppRoutingModule
+ * @description The module responsible for application routing.
+ */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MovieCardComponent } from './movie-card/movie-card.component';

@@ -5,9 +5,13 @@
 // The decorator also imports the services that this module contributes to the global collection of services
 // and specifies the main application view, called the root component, that hosts all other app views.
 
-// The root module class AppModule tells Angular how to assemble the application
+/**
+ * @module AppModule
+ * @description The root module of the application.
+ */
+
+// Core imports
 import { AppComponent } from './app.component';
-// The routing module for the application
 import { AppRoutingModule } from './app-routing.module';
 
 // Angular core modules
