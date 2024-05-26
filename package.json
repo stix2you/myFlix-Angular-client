@@ -6,7 +6,8 @@
     "start": "ng serve --port 8080",
     "build": "ng deploy --base-href=/myFlix-Angular-client/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "private": true,
   "dependencies": {
