@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 8080",
-    "build": "ng deploy --base-href=/myFlix-Angular-client/",
+    "build": "ng deploy --base-href=/myFlix-Angular/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "doc": "jsdoc -c jsdoc.json"
