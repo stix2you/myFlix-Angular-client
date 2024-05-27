@@ -1,13 +1,7 @@
-*************************
-WELCOME TO MYFLIX ANGULAR
-*************************
+# WELCOME TO MYFLIX ANGULAR
 
 
-
---------------------
-Project Description:
---------------------
-
+## Project Description:
 MyFlix Angular is a Movie Catalog App to catalog Movies and store data on the Movies, Directors, Actors, Genres, and the Users who wish to view the data.  It was built using Angular and is connected to a backend database.  It also uses Angular Material for styling. 
 
 
@@ -17,15 +11,14 @@ https://stix2you-myflix-5cbcd3c20372.herokuapp.com/
 Further information and documentation related to this API and database can be found here:
 https://github.com/stix2you/myFlix_api
 
-Git Repo for this client-side Angular project here:
+Git Repo for the client-side Angular project here:
 https://github.com/stix2you/myFlix-Angular-client
 
 
 
 
-----------------------------------
-PROJECT SETUP FOR DEV ENVIRONMENT:
-----------------------------------
+
+## Project setup for development environment:
 
 - Download repo from above URL and install in a directory.
 
@@ -60,9 +53,8 @@ PROJECT SETUP FOR DEV ENVIRONMENT:
 
 
 
-----------------------------
-BUILD and DEPLOY TO GH-PAGES
-----------------------------
+
+## Build and Deploy to gh-pages:
 
 Add angular-cli-ghpages:  ng add angular-cli-ghpages.
 
@@ -70,60 +62,47 @@ Build command:  ng deploy --base-href=/myFlix-Angular-client/
 
 
 
--------------
-DEPENDENCIES:
--------------
 
-Dependencies can be viewed in the package.json file, this is a copy of that file as of the writing of this document:
+## Dependencies:
 
-{
-  "name": "my-flix-angular-client",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve --port 8080",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "^17.3.0",
-    "@angular/cdk": "^17.3.8",
-    "@angular/common": "^17.3.0",
-    "@angular/compiler": "^17.3.0",
-    "@angular/core": "^17.3.0",
-    "@angular/forms": "^17.3.0",
-    "@angular/material": "^17.3.8",
-    "@angular/platform-browser": "^17.3.0",
-    "@angular/platform-browser-dynamic": "^17.3.0",
-    "@angular/router": "^17.3.0",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.14.3"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.6",
-    "@angular/cli": "^17.3.6",
-    "@angular/compiler-cli": "^17.3.0",
-    "@types/jasmine": "~5.1.0",
-    "jasmine-core": "~5.1.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.4.2"
-  }
-}
+Dependencies can be viewed in the package.json file, all dependencies can be installed by running: npm install from the command line
+
+    @angular/animations: ^17.3.0,
+    @angular/cdk: ^17.3.8,
+    @angular/common: ^17.3.0,
+    @angular/compiler: ^17.3.0,
+    @angular/core: ^17.3.0,
+    @angular/forms: ^17.3.0,
+    @angular/material: ^17.3.8,
+    @angular/platform-browser: ^17.3.0,
+    @angular/platform-browser-dynamic: ^17.3.0,
+    @angular/router: ^17.3.0,
+    rxjs: ~7.8.0,
+    tslib: ^2.3.0,
+    zone.js: ~0.14.3
+
+
+## Development specific dependencies:
+
+    @angular-devkit/build-angular: ^17.3.6,
+    @angular/cli: ^17.3.6,
+    @angular/compiler-cli: ^17.3.0,
+    @types/jasmine: ~5.1.0,
+    jasmine-core: ~5.1.0,
+    karma: ~6.4.0,
+    karma-chrome-launcher: ~3.2.0,
+    karma-coverage: ~2.2.0,
+    karma-jasmine: ~5.1.0,
+    karma-jasmine-html-reporter: ~2.1.0,
+    typescript: ~5.4.2
 
 
 
-*****************************
-ANGULAR SPECIFIC INFORMATION:
-*****************************
 
-# MyFlixAngularClient
+# ANGULAR SPECIFIC INFORMATION:
+
+
+## MyFlixAngularClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
