@@ -12,11 +12,10 @@ import { GenreInfoComponent } from '../genre-info/genre-info.component';
    styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent implements OnInit {
-   
-   /**
-   * @description The movie object containing detailed information about the movie.
-   */
    movie: any = {};
+   username: any = localStorage.getItem('username');
+   filteredMovies: any[] = [];
+   favoriteMovies: any[] = [];
 
    /**
    * @description Constructor for MovieDetailComponent.
@@ -49,6 +48,18 @@ export class MovieDetailComponent implements OnInit {
          });
          this.router.navigate(['movies']);
       }
+      this.getFavoriteMovies();
+   }
+
+   getFavoriteMovies(): void {
+      this.fetchApiData.getUserProfile(this.username).subscribe((resp: any) => {
+         this.favoriteMovies = resp.favorite_movies;
+         return this.favoriteMovies;
+      });
+   }
+
+   isFavorite(movie: any): boolean {
+      return this.favoriteMovies.includes(movie.Title);
    }
 
    /**
@@ -65,18 +76,18 @@ export class MovieDetailComponent implements OnInit {
          });
       });
    }
-   
+
    /**
    * @description Adds a movie to the user's list of favorite movies.
    * @param {any} movie - The movie to add.
    */
    addToFavorites(movie: any): void {
-      this.fetchApiData.addFavoriteMovie(movie._id).subscribe((response) => {
+      this.fetchApiData.addFavoriteMovie(movie.Title).subscribe((response) => {
+         this.favoriteMovies.push(movie.Title);
          this.snackBar.open(`${movie.Title} has been added to your favorites!`, 'OK', {
             duration: 2000
          });
       }, (error) => {
-         console.error('Error adding movie to favorites:', error);
          this.snackBar.open('Failed to add to favorites', 'OK', {
             duration: 2000
          });

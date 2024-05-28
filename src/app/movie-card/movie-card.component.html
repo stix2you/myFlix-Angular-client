@@ -21,8 +21,12 @@
             </mat-card-header>
             <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }} Poster">
             <mat-card-actions class="movie-card-actions">
-               <button mat-icon-button color="warn" matTooltip="Add to Favorites" (click)="addToFavorites(movie)"
-                  [attr.aria-label]="'Add ' + movie.Title + ' to Favorites'">
+               <button *ngIf="!isFavorite(movie)" mat-icon-button color="primary"
+                  (click)="addToFavorites(movie)" matTooltip="Add to Favorites">
+                  <mat-icon>add</mat-icon>
+               </button>
+               <button *ngIf="isFavorite(movie)" mat-icon-button color="warn" matTooltip="Is in Favorites"
+                  [attr.aria-label]="movie.Title + 'is in Favorites'">
                   <mat-icon>favorite</mat-icon>
                </button>
                <button mat-raised-button color="primary" class="large-details-button" (click)="viewDetails(movie.Title)"

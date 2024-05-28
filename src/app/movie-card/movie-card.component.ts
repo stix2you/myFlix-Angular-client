@@ -19,7 +19,9 @@ import { Router } from '@angular/router';
 })
 export class MovieCardComponent implements OnInit {
    movies: any[] = [];
+   username: any = localStorage.getItem('username');
    filteredMovies: any[] = [];
+   favoriteMovies: any[] = [];
    searchTerm: string = '';
    sortOrder: string = 'title-asc';
    limit: number = 50;
@@ -43,7 +45,20 @@ export class MovieCardComponent implements OnInit {
    */
    ngOnInit(): void {
       this.getMovies();
+      this.getFavoriteMovies();
    }
+
+   getFavoriteMovies(): void {
+      this.fetchApiData.getUserProfile(this.username).subscribe((resp: any) => {
+         this.favoriteMovies = resp.favorite_movies;
+         return this.favoriteMovies;
+      });
+   }
+
+   isFavorite(movie: any): boolean {
+      return this.favoriteMovies.includes(movie.Title);
+   }
+
 
    /**
     * @description Returns the appropriate font class based on the title length.
@@ -142,6 +157,7 @@ export class MovieCardComponent implements OnInit {
    */
    addToFavorites(movie: any): void {
       this.fetchApiData.addFavoriteMovie(movie.Title).subscribe((response) => {
+         this.favoriteMovies.push(movie.Title);
          this.snackBar.open(`${movie.Title} has been added to your favorites!`, 'OK', {
             duration: 2000
          });
