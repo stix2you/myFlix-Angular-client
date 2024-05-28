@@ -88,19 +88,19 @@ export class FavoriteMoviesComponent implements OnInit {
    * @description Applies filters to the list of favorite movies.
    */
    applyFilters(): void {
-      let movies = [...this.favorites];
+      // console.log('favorites: ', this.favorites);
+      let movies = this.favorites;
       // Filter by search term
       if (this.searchTerm) {
          movies = movies.filter(movie => movie.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
       }
       // Sort movies
-      console.log('Sort order:', this.sortOrder);
-      console.log('Movies:', movies);
+      console.log(movies);
       if (this.sortOrder === 'title-asc') {
          movies.sort((a, b) => a.Title.localeCompare(b.Title));
       } else if (this.sortOrder === 'title-desc') {
          movies.sort((a, b) => b.Title.localeCompare(a.Title));
-      } 
+      }
       // Limit movies
       this.filteredMovies = movies.slice(0, this.limit);
    }

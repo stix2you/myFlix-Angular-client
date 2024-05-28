@@ -94,24 +94,19 @@ export class MovieCardComponent implements OnInit {
    * @description Applies filters to the movies list based on the search term, sort order, and limit.
    */
    applyFilters(): void {
+      console.log('movies: ', this.movies)
       let movies = this.movies;
-
       // Filter by search term
       if (this.searchTerm) {
          movies = movies.filter(movie => movie.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
       }
-
       // Sort movies
+      console.log(movies);
       if (this.sortOrder === 'title-asc') {
          movies.sort((a, b) => a.Title.localeCompare(b.Title));
       } else if (this.sortOrder === 'title-desc') {
          movies.sort((a, b) => b.Title.localeCompare(a.Title));
-      } else if (this.sortOrder === 'year-asc') {
-         movies.sort((a, b) => a.ReleaseYear - b.ReleaseYear);
-      } else if (this.sortOrder === 'year-desc') {
-         movies.sort((a, b) => b.ReleaseYear - a.ReleaseYear);
       }
-
       // Limit movies
       this.filteredMovies = movies.slice(0, this.limit);
    }
