@@ -94,15 +94,13 @@ export class FavoriteMoviesComponent implements OnInit {
          movies = movies.filter(movie => movie.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
       }
       // Sort movies
+      console.log('Sort order:', this.sortOrder);
+      console.log('Movies:', movies);
       if (this.sortOrder === 'title-asc') {
          movies.sort((a, b) => a.Title.localeCompare(b.Title));
       } else if (this.sortOrder === 'title-desc') {
          movies.sort((a, b) => b.Title.localeCompare(a.Title));
-      } else if (this.sortOrder === 'year-asc') {
-         movies.sort((a, b) => a.ReleaseYear - b.ReleaseYear);
-      } else if (this.sortOrder === 'year-desc') {
-         movies.sort((a, b) => b.ReleaseYear - a.ReleaseYear);
-      }
+      } 
       // Limit movies
       this.filteredMovies = movies.slice(0, this.limit);
    }
