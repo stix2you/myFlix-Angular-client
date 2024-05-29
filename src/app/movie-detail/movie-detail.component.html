@@ -1,41 +1,42 @@
-<!-- Render the Movie Details card just below the navbar
-*** Three sections: Image, Information, and Actions (buttons) ... view is split: Image Left, Info/Buttons Right-->
-<mat-card class="movie-detail-card" role="article" [attr.aria-label]="'Movie Details: ' + movie.Title">
-   <div class="movie-detail-content">
+<div class="main-content">
+   <mat-card class=" movie-detail-card" role="article" [attr.aria-label]="'Movie Details: ' + movie.Title">
+      <div class="movie-detail-content">
 
-      <!-- Image -->
-      <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }} Poster" class="movie-image">
+         <!-- Image -->
+         <img mat-card-image [src]="movie.ImagePath" alt="{{ movie.Title }} Poster" class="movie-image">
 
-      <!-- Information -->
-      <div class="movie-details">
-         <mat-card-title>{{ movie.Title }}</mat-card-title>
-         <mat-card-subtitle>{{ movie.ReleaseYear }} | {{ movie.Rating }} | {{ movie.Runtime }}</mat-card-subtitle>
-         <mat-card-content>
-            <p><strong>Genres:</strong>
-               <span *ngFor="let genre of movie.Genres; let isLast = last">
-                  <a href="#" (click)="viewGenre(genre)" [attr.aria-label]="'View details for genre: ' + genre">{{ genre
-                     }}</a><span *ngIf="!isLast"> / </span>
-               </span>
-            </p>
-            <p><strong>Director:</strong> <a href="#" (click)="viewDirector(movie.Director)"
-                  [attr.aria-label]="'View details for director: ' + movie.Director">{{ movie.Director }}</a></p>
-            <p><strong>Starring:</strong> {{ movie.Actors?.join(', ') }}</p>
-            <p>{{ movie.Description }}</p>
-         </mat-card-content>
+         <!-- Information -->
+         <div class="movie-details">
+            <mat-card-title>{{ movie.Title }}</mat-card-title>
+            <mat-card-subtitle>{{ movie.ReleaseYear }} | {{ movie.Rating }} | {{ movie.Runtime }}</mat-card-subtitle>
+            <mat-card-content class="movie-description">
+               <p><strong>Genres:</strong>
+                  <span *ngFor="let genre of movie.Genres; let isLast = last">
+                     <a href="#" (click)="viewGenre(genre)" [attr.aria-label]="'View details for genre: ' + genre">{{
+                        genre
+                        }}</a><span *ngIf="!isLast"> / </span>
+                  </span>
+               </p>
+               <p><strong>Director:</strong> <a href="#" (click)="viewDirector(movie.Director)"
+                     [attr.aria-label]="'View details for director: ' + movie.Director">{{ movie.Director }}</a></p>
+               <p><strong>Starring:</strong> {{ movie.Actors?.join(', ') }}</p>
+               <p>{{ movie.Description }}</p>
+            </mat-card-content>
 
-         <!-- Actions -->
-         <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="goBack()"
-               aria-label="Go back to previous page">Back</button>
-            <button *ngIf="!isFavorite(movie)" mat-icon-button color="primary" (click)="addToFavorites(movie)"
-               matTooltip="Add to Favorites">
-               <mat-icon>add</mat-icon>
-            </button>
-            <button *ngIf="isFavorite(movie)" mat-icon-button color="warn" matTooltip="Is in Favorites"
-               [attr.aria-label]="movie.Title + 'is in Favorites'">
-               <mat-icon>favorite</mat-icon>
-            </button>
-         </mat-card-actions>
+            <!-- Actions -->
+            <mat-card-actions>
+               <button mat-raised-button color="primary" (click)="goBack()"
+                  aria-label="Go back to previous page">Back</button>
+               <button *ngIf="!isFavorite(movie)" mat-icon-button color="primary" (click)="addToFavorites(movie)"
+                  matTooltip="Add to Favorites">
+                  <mat-icon>add</mat-icon>
+               </button>
+               <button *ngIf="isFavorite(movie)" mat-icon-button color="warn" matTooltip="Is in Favorites"
+                  [attr.aria-label]="movie.Title + 'is in Favorites'">
+                  <mat-icon>favorite</mat-icon>
+               </button>
+            </mat-card-actions>
+         </div>
       </div>
-   </div>
-</mat-card>
+   </mat-card>
+</div>
