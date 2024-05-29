@@ -12,8 +12,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -28,6 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatOptionModule } from '@angular/material/core';
 
 // Components
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
@@ -41,6 +41,7 @@ import { FavoriteMoviesComponent } from './favorite-movies/favorite-movies.compo
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { DirectorInfoComponent } from './director-info/director-info.component';
 import { GenreInfoComponent } from './genre-info/genre-info.component';
+import { AuthService } from './authorization/authorization.component';
 
 // Define the routes for the application
 const appRoutes: Routes = [
@@ -83,10 +84,12 @@ const appRoutes: Routes = [
       MatIconModule,
       MatToolbarModule,
       MatSelectModule,
-      MatTooltipModule
+      MatTooltipModule,
+      MatOptionModule
    ],
    providers: [          // Providers of services that this module contributes to the global collection of services
-      provideAnimationsAsync()
+      provideAnimationsAsync(),
+      AuthService
    ],
    bootstrap: [AppComponent]      // The main application view, called the root component, that hosts all other app views
 })
