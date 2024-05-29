@@ -134,6 +134,13 @@ export class MovieDetailComponent implements OnInit {
    * @description Navigates back to the movies view.
    */
    goBack(): void {
-      this.router.navigate(['movies']);
+      this.route.queryParams.subscribe(params => {
+         const from = params['from'];
+         if (from === 'favorites') {
+            this.router.navigate(['favorites']);
+         } else {
+            this.router.navigate(['movies']);
+         }
+      });
    }
 }

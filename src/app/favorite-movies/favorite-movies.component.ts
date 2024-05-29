@@ -88,14 +88,12 @@ export class FavoriteMoviesComponent implements OnInit {
    * @description Applies filters to the list of favorite movies.
    */
    applyFilters(): void {
-      // console.log('favorites: ', this.favorites);
       let movies = this.favorites;
       // Filter by search term
       if (this.searchTerm) {
          movies = movies.filter(movie => movie.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
       }
       // Sort movies
-      console.log(movies);
       if (this.sortOrder === 'title-asc') {
          movies.sort((a, b) => a.Title.localeCompare(b.Title));
       } else if (this.sortOrder === 'title-desc') {
@@ -108,7 +106,7 @@ export class FavoriteMoviesComponent implements OnInit {
    /**
    * @description Handles search term input and triggers filtering.
    * @param {string} term - The search term.
-   */ 
+   */
    onSearch(term: string): void {
       this.searchTerm = term;
       this.applyFilters();
@@ -136,8 +134,8 @@ export class FavoriteMoviesComponent implements OnInit {
    * @description Navigates to the movie details view.
    * @param {string} movieId - The ID of the movie.
    */
-   viewDetails(movieId: string): void {
-      this.router.navigate(['movie', movieId]);
+   viewDetails(title: string): void {
+      this.router.navigate(['movie', title], { queryParams: { from: 'favorites' } });
    }
 
    /**

@@ -94,14 +94,12 @@ export class MovieCardComponent implements OnInit {
    * @description Applies filters to the movies list based on the search term, sort order, and limit.
    */
    applyFilters(): void {
-      console.log('movies: ', this.movies)
       let movies = this.movies;
       // Filter by search term
       if (this.searchTerm) {
          movies = movies.filter(movie => movie.Title.toLowerCase().includes(this.searchTerm.toLowerCase()));
       }
       // Sort movies
-      console.log(movies);
       if (this.sortOrder === 'title-asc') {
          movies.sort((a, b) => a.Title.localeCompare(b.Title));
       } else if (this.sortOrder === 'title-desc') {
@@ -142,8 +140,8 @@ export class MovieCardComponent implements OnInit {
    * @description Navigates to the movie details view.
    * @param {string} movieId - The ID of the movie.
    */
-   viewDetails(movieId: string): void {
-      this.router.navigate(['movie', movieId]);
+   viewDetails(title: string): void {
+      this.router.navigate(['movie', title], { queryParams: { from: 'main' } });
    }
 
    /**
