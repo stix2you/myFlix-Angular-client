@@ -132,7 +132,7 @@ export class FavoriteMoviesComponent implements OnInit {
 
    /**
    * @description Navigates to the movie details view.
-   * @param {string} movieId - The ID of the movie.
+   * @param {string} title - The ID of the movie.
    */
    viewDetails(title: string): void {
       this.router.navigate(['movie', title], { queryParams: { from: 'favorites' } });

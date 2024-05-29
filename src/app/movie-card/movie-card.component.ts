@@ -48,6 +48,9 @@ export class MovieCardComponent implements OnInit {
       this.getFavoriteMovies();
    }
 
+   /**
+    * @description Fetches the user's favorite movies from the API using the FetchApiDataService.
+    */
    getFavoriteMovies(): void {
       this.fetchApiData.getUserProfile(this.username).subscribe((resp: any) => {
          this.favoriteMovies = resp.favorite_movies;
@@ -55,6 +58,11 @@ export class MovieCardComponent implements OnInit {
       });
    }
 
+   /**
+    * @description Checks if a movie is in the user's list of favorite movies.
+    * @param {any} movie 
+    * @returns {boolean} - True if the movie is a favorite, false otherwise.
+    */
    isFavorite(movie: any): boolean {
       return this.favoriteMovies.includes(movie.Title);
    }
@@ -138,7 +146,7 @@ export class MovieCardComponent implements OnInit {
 
    /**
    * @description Navigates to the movie details view.
-   * @param {string} movieId - The ID of the movie.
+   * @param {string} title - The ID of the movie.
    */
    viewDetails(title: string): void {
       this.router.navigate(['movie', title], { queryParams: { from: 'main' } });

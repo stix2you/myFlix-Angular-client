@@ -9,6 +9,7 @@ import { Component, EventEmitter, Output, HostListener } from '@angular/core';
    templateUrl: './search-filter.component.html',
    styleUrls: ['./search-filter.component.scss']
 })
+
 export class SearchFilterComponent {
    @Output() search = new EventEmitter<string>();
    @Output() sort = new EventEmitter<string>();

@@ -1,3 +1,7 @@
+/**
+ * @component UserProfileComponent
+ * @description This component will handle the user profile view, edit, and delete functionality
+ */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -10,11 +14,20 @@ import { AuthService } from '../authorization/authorization.component';
    templateUrl: './user-profile.component.html',
    styleUrls: ['./user-profile.component.scss']
 })
+
 export class UserProfileComponent implements OnInit {
    userProfile: any = {};
    editMode: boolean = false;
    profileForm: FormGroup;
 
+   /**
+   * @description Constructor for UserProfileComponent.
+   * @param {FetchApiDataService} fetchApiData - The service to fetch API data.
+   * @param {FormBuilder} fb - The service to create form groups.
+   * @param {Router} router - The router service to navigate between views.
+   * @param {MatSnackBar} snackBar - The service to display snack bar messages.
+   * @param {AuthService} authService - The service to handle user authorization.
+   */
    constructor(
       private fetchApiData: FetchApiDataService,
       private fb: FormBuilder,
@@ -34,6 +47,9 @@ export class UserProfileComponent implements OnInit {
       this.getUserProfile();
    }
 
+   /**
+    * @description Fetches the user profile from the API using the FetchApiDataService.
+    */
    getUserProfile(): void {
       const username = localStorage.getItem('username');
       if (username) {
@@ -61,10 +77,16 @@ export class UserProfileComponent implements OnInit {
       }
    }
 
+   /**
+    * @description Toggles the edit mode for the user profile form.
+    */
    toggleEditMode(): void {
       this.editMode = !this.editMode;
    }
 
+   /**
+    * @description Submits the user profile form to update the user profile.
+    */
    onSubmit(): void {
       const username = localStorage.getItem('username');
       if (username) {
@@ -108,6 +130,9 @@ export class UserProfileComponent implements OnInit {
       }
    }
 
+   /**
+    * @description Deletes the user account.
+    */
    onDelete(): void {
       const username = localStorage.getItem('username');
       if (username) {

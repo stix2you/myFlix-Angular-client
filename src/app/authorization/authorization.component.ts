@@ -1,3 +1,7 @@
+/**
+ * @component AuthService
+ * @description This component will handle the user authoriziation for login, registration, logout, and profile updates
+ */
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,19 +14,32 @@ import { map, tap } from 'rxjs/operators';
 })
 export class AuthService {
 
+   /**
+    * @description constructor for AuthService component
+    * @param {Router} router 
+    * @param {MatSnackBar} snackBar 
+    * @param {FetchApiDataService} fetchApiData 
+    */
    constructor(
       private router: Router,
       private snackBar: MatSnackBar,
       private fetchApiData: FetchApiDataService
    ) { }
 
+   /**
+    * @description This method will log the user out by removing the token and user info from local storage
+    */
    logout(): Observable<void> {
       localStorage.removeItem('token');
       localStorage.removeItem('username');
       this.router.navigate(['welcome']);
-      return of(); // Return an observable
+      return of();
    }
 
+   /**
+    * @description This method logs the user in
+    * @param {any} userData - user login info
+    */
    login(userData: any): Observable<any> {
       return this.fetchApiData.userLogin(userData).pipe(
          tap((result: any) => {

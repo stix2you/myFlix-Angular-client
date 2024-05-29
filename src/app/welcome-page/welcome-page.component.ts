@@ -8,10 +8,6 @@ import { UserRegistrationFormComponent } from '../user-registration-form/user-re
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { MatDialog } from '@angular/material/dialog';
 
-/**
-   * @description Constructor for WelcomePageComponent.
-   * @param {MatDialog} dialog - The dialog service to open dialogs.
-   */
 @Component({
    selector: 'app-welcome-page',
    templateUrl: './welcome-page.component.html',

@@ -1,3 +1,7 @@
+/**
+ * @component MovieDetailComponent
+ * @description Component for the movie detail view of the application.
+ */
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -51,6 +55,9 @@ export class MovieDetailComponent implements OnInit {
       this.getFavoriteMovies();
    }
 
+   /**
+    * @description Fetches the user's favorite movies from the API using the FetchApiDataService.
+    */
    getFavoriteMovies(): void {
       this.fetchApiData.getUserProfile(this.username).subscribe((resp: any) => {
          this.favoriteMovies = resp.favorite_movies;
@@ -58,6 +65,11 @@ export class MovieDetailComponent implements OnInit {
       });
    }
 
+   /**
+    * @description
+    * @param {any} movie 
+    * @returns {boolean} - True if the movie is a favorite, false otherwise.
+    */
    isFavorite(movie: any): boolean {
       return this.favoriteMovies.includes(movie.Title);
    }

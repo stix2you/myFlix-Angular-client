@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
    templateUrl: './user-login-form.component.html',
    styleUrls: ['./user-login-form.component.scss']
 })
+
 export class UserLoginFormComponent implements OnInit {
 
    @Input() userData = { username: '', password: '' };
@@ -61,5 +62,4 @@ export class UserLoginFormComponent implements OnInit {
          }
       );
    }
-
 }

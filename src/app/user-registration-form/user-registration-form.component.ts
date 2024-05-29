@@ -10,9 +10,18 @@ import { AuthService } from '../authorization/authorization.component';
    templateUrl: './user-registration-form.component.html',
    styleUrls: ['./user-registration-form.component.scss']
 })
+
 export class UserRegistrationFormComponent implements OnInit {
    @Input() userData = { username: '', password: '', email: '', birthday: '' };
 
+   /**
+    * @description Constructor for UserRegistrationFormComponent.
+    * @param {FetchApiDataService} fetchApiData - The service to fetch API data.
+    * @param {MatDialogRef} dialogRef - The reference to the dialog.
+    * @param {MatSnackBar} snackBar - The service to display snack bar messages.
+    * @param {Router} router - The router service to navigate between views.
+    * @param {AuthService} authService - The service to handle user authorization.
+    */
    constructor(
       public fetchApiData: FetchApiDataService,
       public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -23,6 +32,9 @@ export class UserRegistrationFormComponent implements OnInit {
 
    ngOnInit(): void { }
 
+   /**
+    * @description Registers a new user by calling the userRegistration method from the FetchApiDataService.
+    */
    registerUser(): void {
       if (this.isValidForm()) {
          this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
@@ -48,6 +60,9 @@ export class UserRegistrationFormComponent implements OnInit {
       }
    }
 
+   /**
+    * @description Logs in a user by calling the login method from the AuthService.
+    */
    loginUser(): void {
       this.authService.login(this.userData).subscribe((response) => {
          this.snackBar.open('Login successful', 'OK', {
@@ -62,6 +77,10 @@ export class UserRegistrationFormComponent implements OnInit {
       });
    }
 
+   /**
+    * @description Checks if the form is valid.
+    * @returns {boolean} - True if the form is valid, false otherwise.
+    */
    isValidForm(): boolean {
       return this.userData.username.length >= 8 &&
          this.userData.password.length >= 8 &&
@@ -69,11 +88,21 @@ export class UserRegistrationFormComponent implements OnInit {
          this.isValidDate(this.userData.birthday);
    }
 
+   /**
+    * @description Checks if an email is valid.
+    * @param {string} email - The email to check.
+    * @returns {boolean} - True if the email is valid, false otherwise.
+    */
    isValidEmail(email: string): boolean {
       const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;   // regex for email validation
       return re.test(String(email).toLowerCase());
    }
 
+   /**
+    * @description Checks if a date is valid.
+    * @param {string} date - The date to check. 
+    * @returns {boolean} - True if the date is valid, false otherwise.
+    */
    isValidDate(date: string): boolean {
       const parsedDate = Date.parse(date);
       return !isNaN(parsedDate);   // returns false if the date is invalid
