@@ -49,6 +49,7 @@ const appRoutes: Routes = [
    { path: 'movies', component: MovieCardComponent },
    { path: 'profile', component: UserProfileComponent },
    { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+   { path: '**', redirectTo: 'welcome' },
 ];
 
 // The NgModule decorator identifies AppModule as an Angular module class

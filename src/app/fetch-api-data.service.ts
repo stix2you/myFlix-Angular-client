@@ -8,7 +8,8 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 // api url that will provide data for the client app
-const apiUrl = 'https://stix2you-myflix-5cbcd3c20372.herokuapp.com/';
+// const apiUrl = 'https://stix2you-myflix-5cbcd3c20372.herokuapp.com/';
+const apiUrl = 'https://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/';
 
 @Injectable({
    providedIn: 'root'
@@ -29,6 +30,7 @@ export class FetchApiDataService {
    * @returns {Observable<any>} An observable containing a new user object
    */
    public userRegistration(userDetails: any): Observable<any> {
+      console.log("Attempting to register user:", userDetails); // Debug log
       return this.http.post(apiUrl + 'users', userDetails).pipe(
          catchError(this.handleError)
       );
@@ -40,6 +42,7 @@ export class FetchApiDataService {
    * @returns {Observable<any>} An observable containing user object and token
    */
    public userLogin(userDetails: any): Observable<any> {
+      console.log("Attempting to log in user:", userDetails); // Debug log
       return this.http.post(apiUrl + 'login/', userDetails).pipe(
          catchError(this.handleError)
       );
