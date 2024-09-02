@@ -9,7 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 
 // api url that will provide data for the client app
 // const apiUrl = 'https://stix2you-myflix-5cbcd3c20372.herokuapp.com/';
-const apiUrl = 'https://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/';
+const apiUrl = 'http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/';
 
 @Injectable({
    providedIn: 'root'
