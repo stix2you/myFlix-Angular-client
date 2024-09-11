@@ -4,39 +4,52 @@ import { HttpClient } from '@angular/common/http';
 @Component({
    selector: 'app-image-store',
    templateUrl: './image-store.component.html',
-   styleUrls: ['./image-store.component.scss']
+   styleUrls: ['./image-store.component.scss'],
 })
 export class ImageStoreComponent {
    selectedFile: File | null = null;
    originalImageUrl: string | null = null;
    resizedImageUrl: string | null = null;
+   originalImageSize: string | null = null;
+   resizedImageSize: string | null = null;
+   showResizedImage: boolean = false;
+   retryCount: number = 0;
+   maxRetries: number = 7;
+   retryDelay: number = 2000; // 2 seconds
 
    constructor(private http: HttpClient) { }
 
    /**
-    * @description Handles the file input change event and assigns the selected file.
-    * @param event - The file input change event
+    * Handles file selection event.
+    * @param event File selection event
     */
    onFileSelected(event: any): void {
-      const file: File = event.target.files[0];
-      if (file) {
-         this.selectedFile = file;
+      if (event.target.files && event.target.files.length > 0) {
+         this.selectedFile = event.target.files[0];
       }
    }
 
    /**
-    * @description Uploads the selected image to the server and retrieves URLs for the original and resized images.
+    * Uploads the selected image to the server and retrieves URLs for the original and resized images.
     */
    uploadImage(): void {
       if (!this.selectedFile) {
          alert('Please select an image file to upload.');
          return;
       }
+      // Reset variables at the beginning of a new upload
+      this.originalImageUrl = null;
+      this.resizedImageUrl = null;
+      this.originalImageSize = null;
+      this.resizedImageSize = null;
+      this.showResizedImage = false;
+      this.retryCount = 0;
 
       const formData = new FormData();
       formData.append('image', this.selectedFile);
 
-      this.http.post<any>('http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/upload-image', formData)
+      this.http
+         .post<any>('http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/upload-image', formData)
          .subscribe(
             (response) => {
                // Assuming the response includes the location of the uploaded original image
@@ -45,6 +58,10 @@ export class ImageStoreComponent {
                this.resizedImageUrl = this.originalImageUrl ? this.originalImageUrl.replace('original-images', 'resized-images') : null;
                console.log('Original Image URL:', this.originalImageUrl);
                console.log('Resized Image URL:', this.resizedImageUrl);
+
+               // Set a timeout to check if resized image is ready
+               this.retryCount = 0;
+               this.checkResizedImage();
             },
             (error) => {
                console.error('Error uploading the image:', error);
@@ -52,4 +69,42 @@ export class ImageStoreComponent {
             }
          );
    }
+
+   /**
+    * Checks if the resized image is available.
+    */
+   checkResizedImage(): void {
+      if (!this.resizedImageUrl) return;
+
+      const img = new Image();
+      img.onload = () => {
+         this.showResizedImage = true;
+      };
+      img.onerror = () => {
+         if (this.retryCount < this.maxRetries) {
+            this.retryCount++;
+            setTimeout(() => this.checkResizedImage(), this.retryDelay);
+         } else {
+            console.error('Failed to load the resized image after several attempts.');
+         }
+      };
+      img.src = this.resizedImageUrl;
+   }
+
+   /**
+    * Gets the dimensions of the image once it is loaded.
+    * @param event The event emitted when the image is loaded.
+    * @param type The type of image ('original' or 'resized').
+    */
+   getImageSize(event: any, type: string): void {
+      const imgElement = event.target as HTMLImageElement;
+      const size = `${imgElement.naturalWidth} x ${imgElement.naturalHeight}`;
+
+      if (type === 'original') {
+         this.originalImageSize = size;
+      } else if (type === 'resized') {
+         this.resizedImageSize = size;
+      }
+   }
 }
+

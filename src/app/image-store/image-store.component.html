@@ -2,15 +2,27 @@
    <h2>Image Store</h2>
    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
    <button (click)="uploadImage()" [disabled]="!selectedFile">Upload Image</button>
-
-   <div class="images-display" *ngIf="originalImageUrl && resizedImageUrl">
-      <div class="image-section">
-         <h3>Original Image</h3>
-         <img [src]="originalImageUrl" alt="Original Image" />
-      </div>
-      <div class="image-section">
-         <h3>Resized Image</h3>
-         <img [src]="resizedImageUrl" alt="Resized Image" />
-      </div>
+ 
+   <div class="images-display" *ngIf="originalImageUrl">
+     <div class="image-section">
+       <h3>Original Image</h3>
+       <img
+         [src]="originalImageUrl"
+         alt="Original Image"
+         (load)="getImageSize($event, 'original')"
+       />
+       <p class="image-size" *ngIf="originalImageSize">{{ originalImageSize }}</p>
+     </div>
+     <!-- Display the resized image only when the flag is true -->
+     <div class="image-section" *ngIf="showResizedImage">
+       <h3>Resized Image</h3>
+       <img
+         [src]="resizedImageUrl"
+         alt="Resized Image"
+         (load)="getImageSize($event, 'resized')"
+       />
+       <p class="image-size" *ngIf="resizedImageSize">{{ resizedImageSize }}</p>
+     </div>
    </div>
-</div>
+ </div>
+ 

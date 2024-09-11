@@ -1,6 +1,17 @@
 .image-store-container {
+   background-color: #ffffff;
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   padding: 20px;
+   margin: 200px auto 20px auto;
+   max-width: 800px;
    text-align: center;
-   margin: 20px;
+   color: #333;
+
+   h2 {
+      margin-top: 0;
+      color: #333;
+   }
 
    .images-display {
       display: flex;
@@ -15,6 +26,14 @@
          max-width: 300px;
          border: 1px solid #ddd;
          padding: 5px;
+         border-radius: 4px;
+      }
+
+      .image-size {
+         font-style: italic;
+         color: #555;
+         /* A slightly lighter color for the size text */
+         margin-top: 5px;
       }
    }
 }
