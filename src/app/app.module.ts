@@ -42,6 +42,7 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { DirectorInfoComponent } from './director-info/director-info.component';
 import { GenreInfoComponent } from './genre-info/genre-info.component';
 import { AuthService } from './authorization/authorization.component';
+import { ImageStoreComponent } from './image-store/image-store.component';
 
 // Define the routes for the application
 const appRoutes: Routes = [
@@ -66,7 +67,8 @@ const appRoutes: Routes = [
       FavoriteMoviesComponent,
       MovieDetailComponent,
       DirectorInfoComponent,
-      GenreInfoComponent
+      GenreInfoComponent,
+      ImageStoreComponent
    ],
    imports: [         // Modules that are imported by this module
       BrowserModule,

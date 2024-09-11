@@ -1,0 +1,16 @@
+<div class="image-store-container">
+   <h2>Image Store</h2>
+   <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+   <button (click)="uploadImage()" [disabled]="!selectedFile">Upload Image</button>
+
+   <div class="images-display" *ngIf="originalImageUrl && resizedImageUrl">
+      <div class="image-section">
+         <h3>Original Image</h3>
+         <img [src]="originalImageUrl" alt="Original Image" />
+      </div>
+      <div class="image-section">
+         <h3>Resized Image</h3>
+         <img [src]="resizedImageUrl" alt="Resized Image" />
+      </div>
+   </div>
+</div>

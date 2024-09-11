@@ -1,0 +1,20 @@
+.image-store-container {
+   text-align: center;
+   margin: 20px;
+
+   .images-display {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+
+      .image-section {
+         margin: 0 20px;
+      }
+
+      img {
+         max-width: 300px;
+         border: 1px solid #ddd;
+         padding: 5px;
+      }
+   }
+}
