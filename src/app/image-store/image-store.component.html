@@ -2,27 +2,35 @@
    <h2>Image Store</h2>
    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
    <button (click)="uploadImage()" [disabled]="!selectedFile">Upload Image</button>
- 
+
    <div class="images-display" *ngIf="originalImageUrl">
-     <div class="image-section">
-       <h3>Original Image</h3>
-       <img
-         [src]="originalImageUrl"
-         alt="Original Image"
-         (load)="getImageSize($event, 'original')"
-       />
-       <p class="image-size" *ngIf="originalImageSize">{{ originalImageSize }}</p>
-     </div>
-     <!-- Display the resized image only when the flag is true -->
-     <div class="image-section" *ngIf="showResizedImage">
-       <h3>Resized Image</h3>
-       <img
-         [src]="resizedImageUrl"
-         alt="Resized Image"
-         (load)="getImageSize($event, 'resized')"
-       />
-       <p class="image-size" *ngIf="resizedImageSize">{{ resizedImageSize }}</p>
-     </div>
+      <div class="image-section">
+         <h3>Original Image</h3>
+         <img [src]="originalImageUrl" alt="Original Image" (load)="getImageSize($event, 'original')" />
+         <p class="image-size" *ngIf="originalImageSize">{{ originalImageSize }}</p>
+      </div>
+      <!-- Display the resized image only when the flag is true -->
+      <div class="image-section" *ngIf="showResizedImage">
+         <h3>Resized Image</h3>
+         <img [src]="resizedImageUrl" alt="Resized Image" (load)="getImageSize($event, 'resized')" />
+         <p class="image-size" *ngIf="resizedImageSize">{{ resizedImageSize }}</p>
+      </div>
    </div>
- </div>
- 
+
+   <!-- Section to display all images in the S3 bucket -->
+   <div class="image-list" *ngIf="allOriginalImages.length > 0 && allResizedImages.length > 0">
+      <h3>All Images in the S3 Bucket</h3>
+      <div *ngFor="let imageUrl of allOriginalImages; let i = index" class="image-pair">
+         <div class="image-section">
+            <p class="filename">{{ allOriginalFilenames[i] }}</p>
+            <h4>Original</h4>
+            <img [src]="imageUrl" alt="Original" />
+         </div>
+         <div class="image-section">
+            <p class="filename">{{ allResizedFilenames[i] }}</p>
+            <h4>Resized</h4>
+            <img [src]="allResizedImages[i]" alt="Resized" />
+         </div>
+      </div>
+   </div>
+</div>

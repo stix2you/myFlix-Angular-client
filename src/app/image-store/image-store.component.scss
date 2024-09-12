@@ -17,9 +17,18 @@
       display: flex;
       justify-content: center;
       margin-top: 20px;
+      flex-wrap: wrap;
 
       .image-section {
-         margin: 0 20px;
+         margin: 20px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+
+         p,
+         h4 {
+            margin: 5px 0;
+         }
       }
 
       img {
@@ -32,8 +41,50 @@
       .image-size {
          font-style: italic;
          color: #555;
-         /* A slightly lighter color for the size text */
          margin-top: 5px;
+      }
+   }
+
+   .image-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+
+      .image-pair {
+         display: flex;
+         justify-content: center;
+         margin-top: 20px;
+
+         .image-section {
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .filename {
+               font-weight: bold;
+               font-size: 1.2em;
+            }
+
+            p,
+            h4 {
+               margin: 5px 0;
+            }
+         }
+
+         img {
+            max-width: 300px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 4px;
+         }
+
+         .image-size {
+            font-style: italic;
+            color: #555;
+            margin-top: 5px;
+         }
       }
    }
 }

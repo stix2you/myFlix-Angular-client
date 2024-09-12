@@ -17,7 +17,17 @@ export class ImageStoreComponent {
    maxRetries: number = 7;
    retryDelay: number = 2000; // 2 seconds
 
-   constructor(private http: HttpClient) { }
+   // Arrays to store all the images in the S3 bucket
+   allOriginalImages: string[] = [];
+   allResizedImages: string[] = [];
+
+   // Arrays to store the filenames of the images
+   allOriginalFilenames: string[] = [];
+   allResizedFilenames: string[] = [];
+
+   constructor(private http: HttpClient) {
+      this.fetchAllImages(); // Fetch all images on component initialization
+   }
 
    /**
     * Handles file selection event.
@@ -55,13 +65,18 @@ export class ImageStoreComponent {
                // Assuming the response includes the location of the uploaded original image
                this.originalImageUrl = response.location;
                // Ensure originalImageUrl is not undefined before using replace
-               this.resizedImageUrl = this.originalImageUrl ? this.originalImageUrl.replace('original-images', 'resized-images') : null;
+               this.resizedImageUrl = this.originalImageUrl
+                  ? this.originalImageUrl.replace('original-images', 'resized-images')
+                  : null;
                console.log('Original Image URL:', this.originalImageUrl);
                console.log('Resized Image URL:', this.resizedImageUrl);
 
                // Set a timeout to check if resized image is ready
                this.retryCount = 0;
                this.checkResizedImage();
+
+               // Fetch all images after uploading a new one
+               this.fetchAllImages();
             },
             (error) => {
                console.error('Error uploading the image:', error);
@@ -79,6 +94,7 @@ export class ImageStoreComponent {
       const img = new Image();
       img.onload = () => {
          this.showResizedImage = true;
+         this.fetchAllImages(); // Fetch all images after the resized image is ready
       };
       img.onerror = () => {
          if (this.retryCount < this.maxRetries) {
@@ -89,6 +105,32 @@ export class ImageStoreComponent {
          }
       };
       img.src = this.resizedImageUrl;
+   }
+
+   /**
+   * Fetches all images from the S3 bucket.
+   */
+   fetchAllImages(): void {
+      this.http
+         .get<any>('http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/list-images')
+         .subscribe(
+            (response) => {
+               // Exclude the first entry from each array
+               this.allOriginalImages = response.originalImages.slice(1);
+               this.allResizedImages = response.resizedImages.slice(1);
+
+               // Extract filenames from URLs
+               // Extract filenames from URLs with fallback for undefined values
+               this.allOriginalFilenames = this.allOriginalImages.map((url) => url.split('/').pop() || '');
+               this.allResizedFilenames = this.allResizedImages.map((url) => url.split('/').pop() || '');
+
+               console.log('Fetched Original Images:', this.allOriginalImages);
+               console.log('Fetched Resized Images:', this.allResizedImages);
+            },
+            (error) => {
+               console.error('Error fetching images from S3:', error);
+            }
+         );
    }
 
    /**
@@ -107,4 +149,3 @@ export class ImageStoreComponent {
       }
    }
 }
-
