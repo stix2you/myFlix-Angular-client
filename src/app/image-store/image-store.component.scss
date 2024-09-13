@@ -54,7 +54,13 @@
       .image-pair {
          display: flex;
          justify-content: center;
+         align-items: center; // Align items vertically
          margin-top: 20px;
+         flex-wrap: wrap; // Allow wrapping on smaller screens
+         border: 1px solid #eee;
+         padding: 15px;
+         border-radius: 5px;
+         background-color: #f9f9f9;
 
          .image-section {
             margin: 20px;
@@ -64,12 +70,19 @@
 
             .filename {
                font-weight: bold;
-               font-size: 1.2em;
+               font-size: 0.8em;
             }
 
             p,
             h4 {
                margin: 5px 0;
+            }
+
+            /* Ensure .image-size has consistent styling */
+            .image-size {
+               font-style: italic;
+               color: #555;
+               margin-top: 5px;
             }
          }
 
@@ -84,6 +97,39 @@
             font-style: italic;
             color: #555;
             margin-top: 5px;
+         }
+
+         // New Action Section Styles
+         .action-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+
+            .delete-button {
+               background-color: #ff4d4d;
+               color: white;
+               border: none;
+               padding: 10px 20px;
+               border-radius: 5px;
+               cursor: pointer;
+               transition: background-color 0.3s ease;
+               font-size: 1em;
+               font-weight: bold;
+
+               &:hover {
+                  background-color: #e60000;
+               }
+
+               &:active {
+                  background-color: #cc0000;
+               }
+
+               &:disabled {
+                  background-color: #ff9999;
+                  cursor: not-allowed;
+               }
+            }
          }
       }
    }

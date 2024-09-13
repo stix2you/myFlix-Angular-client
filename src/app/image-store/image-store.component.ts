@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
    selector: 'app-image-store',
@@ -25,7 +25,11 @@ export class ImageStoreComponent {
    allOriginalFilenames: string[] = [];
    allResizedFilenames: string[] = [];
 
-   constructor(private http: HttpClient) {
+   // New Arrays to store the sizes of the images
+   allOriginalSizes: string[] = [];
+   allResizedSizes: string[] = [];
+
+   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {
       this.fetchAllImages(); // Fetch all images on component initialization
    }
 
@@ -62,12 +66,10 @@ export class ImageStoreComponent {
          .post<any>('http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/upload-image', formData)
          .subscribe(
             (response) => {
-               // Assuming the response includes the location of the uploaded original image
-               this.originalImageUrl = response.location;
-               // Ensure originalImageUrl is not undefined before using replace
-               this.resizedImageUrl = this.originalImageUrl
-                  ? this.originalImageUrl.replace('original-images', 'resized-images')
-                  : null;
+               // Updated to handle both original and resized locations
+               this.originalImageUrl = response.originalLocation;
+               this.resizedImageUrl = response.resizedLocation;
+
                console.log('Original Image URL:', this.originalImageUrl);
                console.log('Resized Image URL:', this.resizedImageUrl);
 
@@ -104,12 +106,15 @@ export class ImageStoreComponent {
             console.error('Failed to load the resized image after several attempts.');
          }
       };
-      img.src = this.resizedImageUrl;
+      // Add a delay before checking if the resized image is ready
+      setTimeout(() => {
+         img.src = this.resizedImageUrl + '?cacheBust=' + new Date().getTime(); // Prevent caching issues
+      }, 3000); // 3 seconds delay before starting the check
    }
 
    /**
-   * Fetches all images from the S3 bucket.
-   */
+    * Fetches all images from the S3 bucket.
+    */
    fetchAllImages(): void {
       this.http
          .get<any>('http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/list-images')
@@ -123,6 +128,14 @@ export class ImageStoreComponent {
                // Extract filenames from URLs with fallback for undefined values
                this.allOriginalFilenames = this.allOriginalImages.map((url) => url.split('/').pop() || '');
                this.allResizedFilenames = this.allResizedImages.map((url) => url.split('/').pop() || '');
+
+               // Initialize sizes only if they are undefined or not already set
+               if (!this.allOriginalSizes.length) {
+                  this.allOriginalSizes = this.allOriginalImages.map(() => '');
+               }
+               if (!this.allResizedSizes.length) {
+                  this.allResizedSizes = this.allResizedImages.map(() => '');
+               }
 
                console.log('Fetched Original Images:', this.allOriginalImages);
                console.log('Fetched Resized Images:', this.allResizedImages);
@@ -147,5 +160,98 @@ export class ImageStoreComponent {
       } else if (type === 'resized') {
          this.resizedImageSize = size;
       }
+   }
+
+   /**
+ * Gets the dimensions of the image in the list once it is loaded.
+ * @param event The event emitted when the image is loaded.
+ * @param type The type of image ('original' or 'resized').
+ * @param index The index of the image pair in the list.
+ */
+   getListImageSize(event: any, type: string, index: number): void {
+      const imgElement = event.target as HTMLImageElement;
+      const size = `${imgElement.naturalWidth} x ${imgElement.naturalHeight}`;
+      console.log('Image size:', size);
+
+      if (type === 'original') {
+         this.allOriginalSizes[index] = size;
+      } else if (type === 'resized') {
+         this.allResizedSizes[index] = size;
+      }
+
+      // Manually trigger change detection
+      this.cdr.detectChanges();
+   }
+
+   /**
+    * Deletes a pair of images (original and resized) from the S3 bucket.
+    * @param originalFilename The filename of the original image.
+    * @param resizedFilename The filename of the resized image.
+    * @param index The index of the image pair in the list.
+    */
+   deleteImagePair(originalFilename: string, resizedFilename: string, index: number): void {
+      if (!originalFilename || !resizedFilename) {
+         alert('Invalid image filenames provided.');
+         return;
+      }
+
+      // Confirm deletion with the user
+      const confirmDeletion = confirm(
+         `Are you sure you want to delete the image pair:\nOriginal: ${originalFilename}\nResized: ${resizedFilename}?`
+      );
+
+      if (!confirmDeletion) {
+         return;
+      }
+
+      const deletePayload = {
+         originalFilename: originalFilename,
+         resizedFilename: resizedFilename,
+      };
+
+      this.http
+         .post<any>('http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/delete-image', deletePayload)
+         .subscribe(
+            (response) => {
+               console.log('Deletion successful:', response);
+               alert('Images deleted successfully.');
+
+               // Remove the deleted images from the local arrays
+               this.removeImageFromLists(originalFilename, resizedFilename, index);
+            },
+            (error: HttpErrorResponse) => {
+               console.error('Error deleting images:', error);
+               alert('Error deleting images. Please try again.');
+            }
+         );
+   }
+
+   /**
+    * Removes the deleted images from the local image lists.
+    * @param originalFilename The filename of the original image.
+    * @param resizedFilename The filename of the resized image.
+    * @param index The index of the image pair in the list.
+    */
+   private removeImageFromLists(originalFilename: string, resizedFilename: string, index: number): void {
+      const originalIndex = this.allOriginalFilenames.indexOf(originalFilename);
+      const resizedIndex = this.allResizedFilenames.indexOf(resizedFilename);
+
+      if (originalIndex !== -1) {
+         this.allOriginalFilenames.splice(originalIndex, 1);
+         this.allOriginalImages.splice(originalIndex, 1);
+         this.allOriginalSizes.splice(originalIndex, 1); // Remove size
+      }
+
+      if (resizedIndex !== -1) {
+         this.allResizedFilenames.splice(resizedIndex, 1);
+         this.allResizedImages.splice(resizedIndex, 1);
+         this.allResizedSizes.splice(resizedIndex, 1); // Remove size
+      }
+   }
+   /**
+ * Generates a unique cache-busting parameter to prevent caching.
+ */
+   cacheBust(): string {
+      return new Date().getTime().toString();
    }
 }
