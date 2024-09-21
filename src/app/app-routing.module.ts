@@ -19,7 +19,7 @@ const routes: Routes = [
    { path: 'welcome', component: WelcomePageComponent },
    { path: 'movie/:title', component: MovieDetailComponent },
    { path: 'imageStore', component: ImageStoreComponent },
-   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+   // { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
 @NgModule({

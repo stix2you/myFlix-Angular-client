@@ -8,8 +8,8 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 // api url that will provide data for the client app
-// const apiUrl = 'https://stix2you-myflix-5cbcd3c20372.herokuapp.com/';
-const apiUrl = 'http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/';
+const apiUrl = 'https://stix2you-myflix-5cbcd3c20372.herokuapp.com/';
+// const apiUrl = 'http://MyFlixLoadBalancer-308488375.us-east-2.elb.amazonaws.com/';
 // const apiUrl = 'http://localhost:5000';
 
 @Injectable({
@@ -123,6 +123,7 @@ export class FetchApiDataService {
    */
    public getDirectorInfo(director: string): Observable<any> {
       const token = localStorage.getItem('token');
+      console.log("ATTEMPTING TO GET DIRECTOR INFO:", director); // Debug log
       return this.http.get(`${apiUrl}directors/${director}`, {
          headers: new HttpHeaders({
             Authorization: 'Bearer ' + token,
