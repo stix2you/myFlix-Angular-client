@@ -9,7 +9,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FavoriteMoviesComponent } from './favorite-movies/favorite-movies.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
-import { ImageStoreComponent } from './image-store/image-store.component';
 import { APP_BASE_HREF } from '@angular/common';
 
 const routes: Routes = [
@@ -18,8 +17,7 @@ const routes: Routes = [
    { path: 'favorites', component: FavoriteMoviesComponent },
    { path: 'welcome', component: WelcomePageComponent },
    { path: 'movie/:title', component: MovieDetailComponent },
-   { path: 'imageStore', component: ImageStoreComponent },
-   // { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
 @NgModule({
